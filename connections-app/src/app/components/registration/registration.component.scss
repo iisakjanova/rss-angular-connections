@@ -1,0 +1,14 @@
+.registration-form {
+  margin: 0 auto;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.link-to-login {
+  margin-top: 5px;
+}
+
+::ng-deep div.mat-mdc-form-field-error-wrapper {
+  position: static;
+}

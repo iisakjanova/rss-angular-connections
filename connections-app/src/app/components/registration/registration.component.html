@@ -1,0 +1,47 @@
+<form class="registration-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>First name</mat-label>
+    <input matInput formControlName="firstName" />
+    <mat-error *ngIf="form.get('firstName')?.hasError('required')">
+      Please enter a first name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email" />
+    <mat-error *ngIf="form.get('email')?.hasError('required')">
+      Please enter an email
+    </mat-error>
+    <mat-error *ngIf="form.get('email')?.hasError('email')">
+      Incorrect email
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" />
+    <mat-error *ngIf="form.get('password')?.hasError('required')">
+      Please enter a password
+    </mat-error>
+    <mat-error
+      class="error"
+      *ngIf="form.get('password')?.hasError('passwordStrength')">
+      {{ form.get('password')?.getError('passwordStrength') }}
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('minLength')">
+      {{ form.get('password')?.getError('minLength') }}
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('uppercase')">
+      {{ form.get('password')?.getError('uppercase') }}
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('digit')">
+      {{ form.get('password')?.getError('digit') }}
+    </mat-error>
+    <mat-error *ngIf="form.get('password')?.hasError('specialChar')">
+      {{ form.get('password')?.getError('specialChar') }}
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Sign Up</button>
+  <a [routerLink]="['/signin']" class="link-to-login" mat-button color="accent"
+    >Already have account? Sign In >></a
+  >
+</form>
