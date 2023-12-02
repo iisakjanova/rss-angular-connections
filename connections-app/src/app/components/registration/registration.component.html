@@ -40,7 +40,13 @@
       {{ form.get('password')?.getError('specialChar') }}
     </mat-error>
   </mat-form-field>
-  <button mat-raised-button color="primary">Sign Up</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="(onSubmit)"
+    [disabled]="form.invalid || (loading$ | async)">
+    Sign Up
+  </button>
   <a [routerLink]="['/signin']" class="link-to-login" mat-button color="accent"
     >Already have account? Sign In >></a
   >

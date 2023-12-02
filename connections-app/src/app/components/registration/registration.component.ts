@@ -13,6 +13,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectRegistrationLoading } from 'src/app/redux/selectors/registration.selectors';
+import { RegistrationService } from 'src/app/services/registration.service';
+
+import * as RegistrationActions from '../../redux/actions/registration.actions';
 
 export const passwordStrengthValidator = (
   control: AbstractControl
@@ -72,7 +77,13 @@ export const passwordStrengthValidator = (
 export class RegistrationComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  loading$ = this.store.select(selectRegistrationLoading);
+
+  constructor(
+    private fb: FormBuilder,
+    private registrationService: RegistrationService,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -83,7 +94,11 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    // Handle form submission
-    console.log(this.form.value);
+    if (this.form.valid) {
+      const { name, email, password } = this.form.value;
+      this.store.dispatch(
+        RegistrationActions.registerUser({ name, email, password })
+      );
+    }
   }
 }
