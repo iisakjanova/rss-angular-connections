@@ -14,8 +14,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectRegistrationLoading } from 'src/app/redux/selectors/registration.selectors';
-import { RegistrationService } from 'src/app/services/registration.service';
+import {
+  selectRegistrationError,
+  selectRegistrationLoading,
+} from 'src/app/redux/selectors/registration.selectors';
 
 import * as RegistrationActions from '../../redux/actions/registration.actions';
 
@@ -79,9 +81,12 @@ export class RegistrationComponent implements OnInit {
 
   loading$ = this.store.select(selectRegistrationLoading);
 
+  error$ = this.store.select(selectRegistrationError);
+
+  submittedEmailValue = '';
+
   constructor(
     private fb: FormBuilder,
-    private registrationService: RegistrationService,
     private store: Store
   ) {}
 
@@ -95,9 +100,10 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const { name, email, password } = this.form.value;
+      const { firstName, email, password } = this.form.value;
+      this.submittedEmailValue = this.form.get('email')?.value;
       this.store.dispatch(
-        RegistrationActions.registerUser({ name, email, password })
+        RegistrationActions.registerUser({ name: firstName, email, password })
       );
     }
   }

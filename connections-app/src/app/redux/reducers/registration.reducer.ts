@@ -26,10 +26,10 @@ export const registrationReducer = createReducer(
   ),
   on(
     RegistrationActions.registerUserFailure,
-    (state, { error }): RegistrationState => ({
+    (state, error): RegistrationState => ({
       ...state,
       loading: false,
-      error,
+      error: error.error,
     })
   )
 );

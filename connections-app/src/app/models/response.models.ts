@@ -5,7 +5,6 @@ export interface ApiResponse<T> {
 
 export interface ApiError {
   type: string;
-  message: string;
 }
 
 export interface SuccessRegistrationResponse {

@@ -20,9 +20,9 @@ export class RegistrationEffects {
                 response: response.data,
               })
             ),
-            catchError(error =>
-              of(RegistrationActions.registerUserFailure({ error }))
-            )
+            catchError(error => {
+              return of(RegistrationActions.registerUserFailure(error));
+            })
           )
       )
     );

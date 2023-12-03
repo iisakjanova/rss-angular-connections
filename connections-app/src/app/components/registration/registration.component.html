@@ -44,9 +44,22 @@
     mat-raised-button
     color="primary"
     (click)="(onSubmit)"
-    [disabled]="form.invalid || (loading$ | async)">
+    [disabled]="
+      form.invalid ||
+      (loading$ | async) ||
+      ((error$ | async)?.type === 'PrimaryDuplicationException' &&
+        form.get('email')?.value === submittedEmailValue)
+    ">
     Sign Up
   </button>
+  <mat-error *ngIf="error$ | async; let error">
+    {{
+      error.type === 'PrimaryDuplicationException' &&
+      form.get('email')?.value === submittedEmailValue
+        ? 'Email is already taken'
+        : ''
+    }}
+  </mat-error>
   <a [routerLink]="['/signin']" class="link-to-login" mat-button color="accent"
     >Already have account? Sign In >></a
   >
