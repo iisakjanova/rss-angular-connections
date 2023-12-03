@@ -1,6 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
 import { isDevMode, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,6 +21,8 @@ import { appReducer } from './redux/reducers/app.reducer';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatSnackBarModule,
+    MatIconModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, {}),
     EffectsModule.forRoot([RegistrationEffects]),
