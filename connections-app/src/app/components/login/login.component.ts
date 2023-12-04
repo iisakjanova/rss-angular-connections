@@ -10,6 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import * as LoginActions from '../../redux/actions/login.actions';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +30,7 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -40,6 +42,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
+      this.store.dispatch(
+        LoginActions.loginUser({ email, password })
+      );
     }
   }
 }

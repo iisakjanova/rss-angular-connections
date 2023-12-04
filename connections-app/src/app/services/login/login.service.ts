@@ -1,29 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import {
-  ApiResponse,
-  SuccessRegistrationResponse,
-} from '../models/response.models';
+import { ApiResponse, SuccessRegistrationResponse } from 'src/app/models/response.models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class RegistrationService {
-  private apiUrl = 'https://tasks.app.rs.school/angular/registration';
+export class LoginService {
+  private apiUrl = 'https://tasks.app.rs.school/angular/login';
 
   constructor(private http: HttpClient) {}
 
-  registerUser(
+  loginUser(
     email: string,
-    name: string,
     password: string
   ): Observable<ApiResponse<SuccessRegistrationResponse>> {
-    const requestBody = { email, name, password };
+    const requestBody = { email, password };
     return this.http.post<ApiResponse<SuccessRegistrationResponse>>(
       this.apiUrl,
       requestBody
     );
-  }
-}
+  }}

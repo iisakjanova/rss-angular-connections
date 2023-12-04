@@ -4,45 +4,45 @@ import { NavigationExtras, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { RegistrationService } from 'src/app/services/registration/registration.service';
 
-import * as RegistrationActions from '../actions/registration.actions';
+import * as LoginActions from '../actions/login.actions';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Injectable()
-export class RegistrationEffects {
+export class LoginEffects {
   registerUser$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(RegistrationActions.registerUser),
+      ofType(LoginActions.loginUser),
       switchMap(action =>
-        this.registrationService
-          .registerUser(action.email, action.name, action.password)
+        this.loginService
+          .loginUser(action.email, action.password)
           .pipe(
             map(response => {
-              this.snackBar.open(`Registration successful!`, 'Close', {
+              this.snackBar.open(`Login successful!`, 'Close', {
                 duration: 5000,
                 panelClass: ['success-snackbar'],
               });
-              const redirectUrl = '/signin';
+              const redirectUrl = '/main';
 
               const navigationExtras: NavigationExtras = {
                 queryParamsHandling: 'preserve',
               };
 
               this.router.navigate([redirectUrl], navigationExtras);
-              return RegistrationActions.registerUserSuccess({
+              return LoginActions.loginUserSuccess({
                 response: response.data,
               });
             }),
             catchError(error => {
               this.snackBar.open(
-                `Registration failed: ${error.error.message}`,
+                `Login failed: ${error.error.message}`,
                 'Close',
                 {
                   duration: 5000,
                   panelClass: ['error-snackbar'],
                 }
               );
-              return of(RegistrationActions.registerUserFailure(error));
+              return of(LoginActions.loginUserFailure(error));
             })
           )
       )
@@ -51,7 +51,7 @@ export class RegistrationEffects {
 
   constructor(
     private actions$: Actions,
-    private registrationService: RegistrationService,
+    private loginService: LoginService,
     private snackBar: MatSnackBar,
     public router: Router
   ) {}

@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationEffects } from './redux/effects/registration.effects';
 import { appReducer } from './redux/reducers/app.reducer';
+import { LoginEffects } from './redux/effects/login.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,7 @@ import { appReducer } from './redux/reducers/app.reducer';
     MatIconModule,
     HttpClientModule,
     StoreModule.forRoot(appReducer, {}),
-    EffectsModule.forRoot([RegistrationEffects]),
+    EffectsModule.forRoot([RegistrationEffects, LoginEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
