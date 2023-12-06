@@ -24,7 +24,7 @@ export class LoginEffects {
               duration: 5000,
               panelClass: ['success-snackbar'],
             });
-            const redirectUrl = '/main';
+            const redirectUrl = '/';
 
             const navigationExtras: NavigationExtras = {
               queryParamsHandling: 'preserve',
