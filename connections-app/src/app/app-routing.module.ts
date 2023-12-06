@@ -6,6 +6,7 @@ import { nonAuthGuard } from './guards/non-auth/non-auth.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 
 const routes: Routes = [
@@ -20,12 +21,16 @@ const routes: Routes = [
     canActivate: [nonAuthGuard],
   },
   {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [authGuard],
+  },
+  {
     path: '',
     pathMatch: 'full',
     component: MainPageComponent,
     canActivate: [authGuard],
   },
-
   { path: '**', component: NotFoundPageComponent },
 ];
 
