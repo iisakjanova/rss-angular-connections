@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiResponse, SuccessRegistrationResponse } from 'src/app/models/response.models';
+import {
+  ApiResponse,
+  SuccessRegistrationResponse,
+} from 'src/app/models/response.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   private apiUrl = 'https://tasks.app.rs.school/angular/login';
@@ -20,4 +23,5 @@ export class LoginService {
       this.apiUrl,
       requestBody
     );
-  }}
+  }
+}

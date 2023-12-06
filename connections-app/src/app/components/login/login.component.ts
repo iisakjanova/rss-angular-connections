@@ -11,6 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
+import {
+  selectLoginError,
+  selectLoginLoading,
+} from 'src/app/redux/selectors/login.selectors';
+
 import * as LoginActions from '../../redux/actions/login.actions';
 
 @Component({
@@ -30,7 +35,18 @@ import * as LoginActions from '../../redux/actions/login.actions';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private store: Store) {}
+  loading$ = this.store.select(selectLoginLoading);
+
+  error$ = this.store.select(selectLoginError);
+
+  submittedEmailValue = '';
+
+  submittedPasswordValue = '';
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -42,9 +58,9 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       const { email, password } = this.form.value;
-      this.store.dispatch(
-        LoginActions.loginUser({ email, password })
-      );
+      this.submittedEmailValue = this.form.get('email')?.value;
+      this.submittedPasswordValue = this.form.get('password')?.value;
+      this.store.dispatch(LoginActions.loginUser({ email, password }));
     }
   }
 }

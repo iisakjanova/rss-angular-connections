@@ -1,10 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as LoginActions from '../actions/login.actions';
-import {
-  initialLoginState,
-  LoginState,
-} from '../login.state';
+import { initialLoginState, LoginState } from '../login.state';
 
 export const loginReducer = createReducer(
   initialLoginState,

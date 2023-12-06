@@ -20,7 +20,13 @@
     mat-raised-button
     color="primary"
     (click)="(onSubmit)"
-    [disabled]="form.invalid">
+    [disabled]="
+      form.invalid ||
+      (loading$ | async) ||
+      ((error$ | async)?.type === 'NotFoundException' &&
+        form.get('email')?.value === submittedEmailValue &&
+        form.get('password')?.value === submittedPasswordValue)
+    ">
     Sign In
   </button>
   <a
