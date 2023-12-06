@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  ApiResponse,
-  SuccessRegistrationResponse,
-} from 'src/app/models/response.models';
+import { SuccessLoginResponse } from 'src/app/models/response.models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,14 +11,8 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  loginUser(
-    email: string,
-    password: string
-  ): Observable<ApiResponse<SuccessRegistrationResponse>> {
+  loginUser(email: string, password: string): Observable<SuccessLoginResponse> {
     const requestBody = { email, password };
-    return this.http.post<ApiResponse<SuccessRegistrationResponse>>(
-      this.apiUrl,
-      requestBody
-    );
+    return this.http.post<SuccessLoginResponse>(this.apiUrl, requestBody);
   }
 }

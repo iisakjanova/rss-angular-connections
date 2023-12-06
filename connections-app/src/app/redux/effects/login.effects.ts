@@ -16,6 +16,10 @@ export class LoginEffects {
       switchMap(action =>
         this.loginService.loginUser(action.email, action.password).pipe(
           map(response => {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('uid', response.uid);
+            localStorage.setItem('email', action.email);
+
             this.snackBar.open(`Login successful!`, 'Close', {
               duration: 5000,
               panelClass: ['success-snackbar'],
@@ -28,7 +32,7 @@ export class LoginEffects {
 
             this.router.navigate([redirectUrl], navigationExtras);
             return LoginActions.loginUserSuccess({
-              response: response.data,
+              response,
             });
           }),
           catchError(error => {
