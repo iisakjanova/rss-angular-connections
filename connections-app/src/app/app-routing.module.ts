@@ -5,6 +5,7 @@ import { authGuard } from './guards/auth/auth.guard';
 import { nonAuthGuard } from './guards/non-auth/non-auth.guard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
     component: MainPageComponent,
     canActivate: [authGuard],
   },
+
+  { path: '**', component: NotFoundPageComponent },
 ];
 
 @NgModule({

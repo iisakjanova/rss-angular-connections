@@ -1,0 +1,22 @@
+<div class="not-found-page">
+  <div class="container">
+    <h1>404 - Page Not Found</h1>
+    <h3>Sorry, the url is wrong :(</h3>
+    <a
+      *ngIf="isAuthenticated"
+      [routerLink]="['/']"
+      class="link"
+      mat-button
+      color="accent"
+      >Go to Main Page</a
+    >
+    <a
+      *ngIf="!isAuthenticated"
+      [routerLink]="['/login']"
+      class="link"
+      mat-button
+      color="accent"
+      >Go to Login Page</a
+    >
+  </div>
+</div>
