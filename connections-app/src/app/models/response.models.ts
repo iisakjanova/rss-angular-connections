@@ -16,3 +16,10 @@ export interface SuccessLoginResponse {
   uid: string;
   token: string;
 }
+
+export interface SuccessProfileResponse {
+  uid: { S: string };
+  email: { S: string };
+  name: { S: string };
+  createdAt: { S: string };
+}
