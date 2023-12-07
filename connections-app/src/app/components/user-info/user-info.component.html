@@ -1,6 +1,6 @@
-<mat-card class="user-info">
-  <p>ID: 12345</p>
-  <p>User name: John</p>
-  <p>Email: john&#64;gmail.com</p>
-  <p>Creation time: 12/23/2023</p>
+<mat-card *ngIf="(profileData$ | async)?.uid" class="user-info">
+  <p>ID: {{ (profileData$ | async)?.uid }}</p>
+  <p>User name: {{ (profileData$ | async)?.name }}</p>
+  <p>Email: {{ (profileData$ | async)?.email }}</p>
+  <p>Creation time: {{ (profileData$ | async)?.createdAt | date: 'medium' }}</p>
 </mat-card>
