@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './components/header/header.component';
 import { GetProfileEffects } from './redux/effects/get-profile.effects';
 import { LoginEffects } from './redux/effects/login.effects';
 import { RegistrationEffects } from './redux/effects/registration.effects';
@@ -26,6 +27,7 @@ import { appReducer } from './redux/reducers/app.reducer';
     MatSnackBarModule,
     MatIconModule,
     HttpClientModule,
+    HeaderComponent,
     StoreModule.forRoot(appReducer, {}),
     EffectsModule.forRoot([
       RegistrationEffects,

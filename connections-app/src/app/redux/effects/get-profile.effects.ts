@@ -17,18 +17,21 @@ export class GetProfileEffects {
           .getProfile(action.email, action.uid, action.token)
           .pipe(
             map(response => {
-              this.snackBar.open(`Fetching user info successful!`, 'Close', {
-                duration: 5000,
-                panelClass: ['success-snackbar'],
-              });
-
               return ProfileActions.getProfileSuccess({
                 response,
               });
             }),
             catchError(error => {
+              let message = '';
+
+              if (!error.error.message) {
+                message = `No internet connection`;
+              } else {
+                message = error.error.message;
+              }
+              
               this.snackBar.open(
-                `Fetching user info failed: ${error.error.message}`,
+                `Fetching user info failed: ${message}`,
                 'Close',
                 {
                   duration: 5000,
