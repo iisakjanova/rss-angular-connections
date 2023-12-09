@@ -20,4 +20,8 @@
   &__buttons-wrapper {
     display: flex;
   }
+
+  ::ng-deep div.mat-mdc-form-field-error-wrapper {
+    position: static;
+  }
 } 

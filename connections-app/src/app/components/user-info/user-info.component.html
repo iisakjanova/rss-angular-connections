@@ -23,6 +23,15 @@
       <mat-form-field color="accent">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
+        <mat-error *ngIf="profileForm.get('name')?.hasError('required')">
+          Please enter a name
+        </mat-error>
+        <mat-error *ngIf="profileForm.get('name')?.hasError('pattern')">
+          Name should have only letters or spaces
+        </mat-error>
+        <mat-error *ngIf="profileForm.get('name')?.hasError('maxlength')">
+          Name should be less than 40 characters
+        </mat-error>
       </mat-form-field>
     </form>
   </ng-template>

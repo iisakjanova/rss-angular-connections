@@ -51,7 +51,14 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      name: ['', Validators.required],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z\s]*$/),
+          Validators.maxLength(40),
+        ],
+      ],
     });
 
     this.profileData$.subscribe(profileData => {

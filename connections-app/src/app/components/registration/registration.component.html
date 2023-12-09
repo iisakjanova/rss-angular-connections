@@ -5,6 +5,12 @@
     <mat-error *ngIf="form.get('firstName')?.hasError('required')">
       Please enter a first name
     </mat-error>
+    <mat-error *ngIf="form.get('firstName')?.hasError('pattern')">
+      Name should have only letters or spaces
+    </mat-error>
+    <mat-error *ngIf="form.get('firstName')?.hasError('maxlength')">
+      Name should be less than 40 characters
+    </mat-error>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Email</mat-label>

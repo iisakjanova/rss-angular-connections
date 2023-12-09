@@ -92,7 +92,14 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      firstName: ['', Validators.required],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z\s]*$/),
+          Validators.maxLength(40),
+        ],
+      ],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, passwordStrengthValidator]],
     });
