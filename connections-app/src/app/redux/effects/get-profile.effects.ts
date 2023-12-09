@@ -29,7 +29,7 @@ export class GetProfileEffects {
               } else {
                 message = error.error.message;
               }
-              
+
               this.snackBar.open(
                 `Fetching user info failed: ${message}`,
                 'Close',

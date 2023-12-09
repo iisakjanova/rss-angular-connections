@@ -1,6 +1,38 @@
 <mat-card *ngIf="(profileData$ | async)?.uid" class="user-info">
-  <p>ID: {{ (profileData$ | async)?.uid }}</p>
-  <p>User name: {{ (profileData$ | async)?.name }}</p>
-  <p>Email: {{ (profileData$ | async)?.email }}</p>
-  <p>Creation time: {{ (profileData$ | async)?.createdAt | date: 'medium' }}</p>
+  <p class="user-info__item">ID: {{ (profileData$ | async)?.uid }}</p>
+  <p class="user-info__item">Email: {{ (profileData$ | async)?.email }}</p>
+  <p class="user-info__item">
+    Creation time: {{ (profileData$ | async)?.createdAt | date: 'medium' }}
+  </p>
+
+  <!-- Editable field with ngIf condition -->
+  <ng-container *ngIf="!isEditing; else editingField">
+    <div class="user-info__item-wrapper">
+      <p class="user-info__item">
+        User name: {{ (profileData$ | async)?.name }}
+      </p>
+      <button *ngIf="!isEditing" (click)="startEditing()" mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+  </ng-container>
+
+  <!-- Editable field template -->
+  <ng-template #editingField>
+    <form [formGroup]="profileForm">
+      <mat-form-field color="accent">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+    </form>
+  </ng-template>
+
+  <div class="user-info__buttons-wrapper">
+    <button *ngIf="isEditing" (click)="saveChanges()" mat-icon-button>
+      <mat-icon color="accent">check_circle</mat-icon>
+    </button>
+    <button *ngIf="isEditing" (click)="cancelEditing()" mat-icon-button>
+      <mat-icon color="warn">cancel</mat-icon>
+    </button>
+  </div>
 </mat-card>
