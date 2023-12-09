@@ -41,6 +41,8 @@ export class UserInfoComponent implements OnInit {
 
   editedName = '';
 
+  initialFormValues = {};
+
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -68,6 +70,7 @@ export class UserInfoComponent implements OnInit {
 
   startEditing() {
     this.isEditing = true;
+    this.initialFormValues = { ...this.profileForm.value };
   }
 
   saveChanges() {
@@ -76,5 +79,6 @@ export class UserInfoComponent implements OnInit {
 
   cancelEditing() {
     this.isEditing = false;
+    this.profileForm.patchValue(this.initialFormValues);
   }
 }
