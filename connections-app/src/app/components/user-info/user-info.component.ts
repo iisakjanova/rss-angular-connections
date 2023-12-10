@@ -12,13 +12,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
+import * as LogoutActions from 'src/app/redux/actions/logout.actions';
+import * as ProfileActions from 'src/app/redux/actions/profile.actions';
 import {
   selectProfileData,
   selectProfileLoading,
 } from 'src/app/redux/selectors/profile.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
-import * as ProfileActions from '../../redux/actions/profile.actions';
 
 @Component({
   selector: 'app-user-info',
@@ -95,5 +95,10 @@ export class UserInfoComponent implements OnInit {
   cancelEditing() {
     this.isEditing = false;
     this.profileForm.patchValue(this.initialFormValues);
+  }
+
+  logout() {
+    const credentials = this.authService.getCredentials();
+    this.store.dispatch(LogoutActions.logoutUser(credentials));
   }
 }

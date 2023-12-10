@@ -1,11 +1,19 @@
 .user-info {
-  width: 50%;
+  width: 80%;
   margin: 0 auto;
   padding: 50px;
   background: #7b1fa2;
 
+  &__logout-button {
+    margin-left: auto;
+  }
+
   &__item {
     margin-bottom: 40px;
+
+    &__title {
+      color: rgba(255, 255, 255, 0.7)
+    }
   }
 
   &__item-wrapper {

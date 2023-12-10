@@ -11,6 +11,10 @@ export interface SuccessRegistrationResponse {
   statusCode: number;
 }
 
+export interface SuccessLogoutResponse {
+  statusCode: number;
+}
+
 export interface SuccessLoginResponse {
   statusCode: number;
   uid: string;

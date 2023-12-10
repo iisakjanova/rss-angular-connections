@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { GetProfileEffects } from './redux/effects/get-profile.effects';
 import { LoginEffects } from './redux/effects/login.effects';
+import { LogoutEffects } from './redux/effects/logout.effects';
 import { RegistrationEffects } from './redux/effects/registration.effects';
 import { UpdateProfileEffects } from './redux/effects/update-profile.effects';
 import { appReducer } from './redux/reducers/app.reducer';
@@ -35,6 +36,7 @@ import { appReducer } from './redux/reducers/app.reducer';
       LoginEffects,
       GetProfileEffects,
       UpdateProfileEffects,
+      LogoutEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],

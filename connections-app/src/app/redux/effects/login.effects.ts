@@ -10,7 +10,7 @@ import * as LoginActions from '../actions/login.actions';
 
 @Injectable()
 export class LoginEffects {
-  registerUser$ = createEffect(() => {
+  loginUser$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(LoginActions.loginUser),
       switchMap(action =>
