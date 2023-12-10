@@ -25,4 +25,25 @@ export class ProfileService {
     const options = { headers };
     return this.http.get<SuccessProfileResponse>(this.apiUrl, options);
   }
+
+  updateProfile(
+    email: string,
+    uid: string,
+    token: string,
+    name: string
+  ): Observable<SuccessProfileResponse> {
+    const headers = new HttpHeaders({
+      'rs-email': email,
+      'rs-uid': uid,
+      Authorization: `Bearer ${token}`,
+    });
+
+    const requestBody = { name };
+    const options = { headers };
+    return this.http.put<SuccessProfileResponse>(
+      this.apiUrl,
+      requestBody,
+      options
+    );
+  }
 }

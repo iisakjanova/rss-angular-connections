@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { GetProfileEffects } from './redux/effects/get-profile.effects';
 import { LoginEffects } from './redux/effects/login.effects';
 import { RegistrationEffects } from './redux/effects/registration.effects';
+import { UpdateProfileEffects } from './redux/effects/update-profile.effects';
 import { appReducer } from './redux/reducers/app.reducer';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { appReducer } from './redux/reducers/app.reducer';
       RegistrationEffects,
       LoginEffects,
       GetProfileEffects,
+      UpdateProfileEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],

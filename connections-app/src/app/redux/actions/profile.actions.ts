@@ -18,3 +18,18 @@ export const getProfileFailure = createAction(
   '[Profile] Get Profile Failure',
   props<{ error: ApiError }>()
 );
+
+export const updateProfile = createAction(
+  '[Profile] Update Profile',
+  props<{ email: string; uid: string; token: string; name: string }>()
+);
+
+export const updateProfileSuccess = createAction(
+  '[Profile] Update Profile Success',
+  props<{ name: string }>()
+);
+
+export const updateProfileFailure = createAction(
+  '[Profile] Update Profile Failure',
+  props<{ error: ApiError }>()
+);

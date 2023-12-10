@@ -82,6 +82,10 @@ export class UserInfoComponent implements OnInit {
 
   saveChanges() {
     this.isEditing = false;
+    const credentials = this.authService.getCredentials();
+    const params = { ...credentials, name: this.profileForm.value.name };
+
+    this.store.dispatch(ProfileActions.updateProfile(params));
   }
 
   cancelEditing() {

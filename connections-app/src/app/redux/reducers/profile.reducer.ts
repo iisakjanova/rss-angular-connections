@@ -34,5 +34,33 @@ export const profileReducer = createReducer(
       loading: false,
       error: error.error,
     })
+  ),
+  on(
+    ProfileActions.updateProfile,
+    (state): ProfileState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    ProfileActions.updateProfileSuccess,
+    (state, { name }): ProfileState => ({
+      ...state,
+      data: {
+        ...state.data,
+        name,
+      },
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    ProfileActions.updateProfileFailure,
+    (state, error): ProfileState => ({
+      ...state,
+      loading: false,
+      error: error.error,
+    })
   )
 );
