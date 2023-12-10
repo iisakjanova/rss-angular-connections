@@ -12,7 +12,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { selectProfileData } from 'src/app/redux/selectors/profile.selectors';
+import {
+  selectProfileData,
+  selectProfileLoading,
+} from 'src/app/redux/selectors/profile.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 import * as ProfileActions from '../../redux/actions/profile.actions';
@@ -34,6 +37,8 @@ import * as ProfileActions from '../../redux/actions/profile.actions';
 })
 export class UserInfoComponent implements OnInit {
   profileData$ = this.store.select(selectProfileData);
+
+  loading$ = this.store.select(selectProfileLoading);
 
   profileForm!: FormGroup;
 
@@ -81,7 +86,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   saveChanges() {
-    this.isEditing = false;
     const credentials = this.authService.getCredentials();
     const params = { ...credentials, name: this.profileForm.value.name };
 
