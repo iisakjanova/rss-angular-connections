@@ -3,7 +3,8 @@
     class="user-info__logout-button"
     color="warn"
     mat-stroked-button
-    (click)="logout()">
+    (click)="logout()"
+    [disabled]="logoutLoading$ | async">
     Logout
   </button>
   <p class="mat-headline-6 user-info__item">

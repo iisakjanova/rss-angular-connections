@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import * as LogoutActions from 'src/app/redux/actions/logout.actions';
 import * as ProfileActions from 'src/app/redux/actions/profile.actions';
+import { selectLogoutLoading } from 'src/app/redux/selectors/logout.selectors';
 import {
   selectProfileData,
   selectProfileLoading,
@@ -39,6 +40,8 @@ export class UserInfoComponent implements OnInit {
   profileData$ = this.store.select(selectProfileData);
 
   loading$ = this.store.select(selectProfileLoading);
+
+  logoutLoading$ = this.store.select(selectLogoutLoading);
 
   profileForm!: FormGroup;
 

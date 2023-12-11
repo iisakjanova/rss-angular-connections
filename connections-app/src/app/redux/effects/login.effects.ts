@@ -36,14 +36,18 @@ export class LoginEffects {
             });
           }),
           catchError(error => {
-            this.snackBar.open(
-              `Login failed: ${error.error.message}`,
-              'Close',
-              {
-                duration: 5000,
-                panelClass: ['error-snackbar'],
-              }
-            );
+            let message = '';
+
+            if (!error.error.message) {
+              message = `No internet connection`;
+            } else {
+              message = error.error.message;
+            }
+
+            this.snackBar.open(`Login failed: ${message}`, 'Close', {
+              duration: 5000,
+              panelClass: ['error-snackbar'],
+            });
             return of(LoginActions.loginUserFailure(error));
           })
         )
