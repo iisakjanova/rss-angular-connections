@@ -27,3 +27,15 @@ export interface SuccessProfileResponse {
   name: { S: string };
   createdAt: { S: string };
 }
+
+export interface Group {
+  id: { S: string };
+  name: { S: string };
+  createdAt: { S: string };
+  createdBy: { S: string };
+}
+
+export interface SuccessGroupsResponse {
+  Count: number;
+  Items: Group[];
+}

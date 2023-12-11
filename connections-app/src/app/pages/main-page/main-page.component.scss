@@ -1,0 +1,10 @@
+.main-page {
+  &__content {
+    display: flex;
+
+    &__group-list {
+      width: 50%;
+      border: 1px solid #555;
+    }
+  }
+}
