@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { LogoutState } from '../logout.state';
+import { LogoutState } from '../state/logout.state';
 
 export const selectLogoutState = createFeatureSelector<LogoutState>('logout');
 

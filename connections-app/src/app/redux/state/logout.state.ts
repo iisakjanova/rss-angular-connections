@@ -1,4 +1,4 @@
-import { ApiError } from '../models/response.models';
+import { ApiError } from '../../models/response.models';
 
 export interface LogoutState {
   loading: boolean;

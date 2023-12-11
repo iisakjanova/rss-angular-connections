@@ -1,6 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import { AppState } from '../app.state';
+import { AppState } from '../state/app.state';
+import { groupsReducer } from './groups.reducer';
 import { loginReducer } from './login.reducer';
 import { logoutReducer } from './logout.reducer';
 import { profileReducer } from './profile.reducer';
@@ -11,4 +12,5 @@ export const appReducer: ActionReducerMap<AppState> = {
   login: loginReducer,
   profile: profileReducer,
   logout: logoutReducer,
+  groups: groupsReducer,
 };

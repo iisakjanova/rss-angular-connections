@@ -4,7 +4,7 @@ import * as RegistrationActions from '../actions/registration.actions';
 import {
   initialRegistrationState,
   RegistrationState,
-} from '../registration.state';
+} from '../state/registration.state';
 
 export const registrationReducer = createReducer(
   initialRegistrationState,

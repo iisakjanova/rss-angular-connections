@@ -1,3 +1,4 @@
+import { GroupsState } from './groups.state';
 import { LoginState } from './login.state';
 import { LogoutState } from './logout.state';
 import { ProfileState } from './profile.state';
@@ -8,4 +9,5 @@ export interface AppState {
   login: LoginState;
   profile: ProfileState;
   logout: LogoutState;
+  groups: GroupsState;
 }

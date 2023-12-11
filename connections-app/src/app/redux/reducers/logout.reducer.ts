@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as LogoutActions from '../actions/logout.actions';
-import { initialLogoutState, LogoutState } from '../logout.state';
+import { initialLogoutState, LogoutState } from '../state/logout.state';
 
 export const logoutReducer = createReducer(
   initialLogoutState,

@@ -1,8 +1,19 @@
-<mat-nav-list>
-  <a
-    mat-list-item
-    *ngFor="let item of list"
-    [routerLink]="['/group/', item?.id]">
-    {{ item?.name }}
-  </a>
-</mat-nav-list>
+<div class="group-list">
+  <div class="group-list__buttons">
+    <button
+      class="group-list__button"
+      color="primary"
+      mat-raised-button
+      (click)="update()">
+      Update
+    </button>
+  </div>
+  <mat-nav-list>
+    <a
+      mat-list-item
+      *ngFor="let item of list"
+      [routerLink]="['/group/', item?.id]">
+      {{ item?.name }}
+    </a>
+  </mat-nav-list>
+</div>
