@@ -62,5 +62,11 @@ export const profileReducer = createReducer(
       loading: false,
       error: error.error,
     })
+  ),
+  on(
+    ProfileActions.removeProfileInfoFromState,
+    (): ProfileState => ({
+      ...initialProfileState,
+    })
   )
 );

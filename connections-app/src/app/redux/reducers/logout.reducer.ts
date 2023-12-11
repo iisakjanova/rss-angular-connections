@@ -1,12 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 
-import * as LoginActions from '../actions/login.actions';
+import * as LogoutActions from '../actions/logout.actions';
 import { initialLogoutState, LogoutState } from '../logout.state';
 
 export const logoutReducer = createReducer(
   initialLogoutState,
   on(
-    LoginActions.loginUser,
+    LogoutActions.logoutUser,
     (state): LogoutState => ({
       ...state,
       loading: true,
@@ -14,7 +14,7 @@ export const logoutReducer = createReducer(
     })
   ),
   on(
-    LoginActions.loginUserSuccess,
+    LogoutActions.logoutUserSuccess,
     (state): LogoutState => ({
       ...state,
       loading: false,
@@ -22,7 +22,7 @@ export const logoutReducer = createReducer(
     })
   ),
   on(
-    LoginActions.loginUserFailure,
+    LogoutActions.logoutUserFailure,
     (state, error): LogoutState => ({
       ...state,
       loading: false,

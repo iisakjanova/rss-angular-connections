@@ -33,3 +33,7 @@ export const updateProfileFailure = createAction(
   '[Profile] Update Profile Failure',
   props<{ error: ApiError }>()
 );
+
+export const removeProfileInfoFromState = createAction(
+  '[Profile] Remove Profile Info From State'
+);

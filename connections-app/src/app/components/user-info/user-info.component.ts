@@ -75,7 +75,10 @@ export class UserInfoComponent implements OnInit {
 
       if (!profileData.uid) {
         const credentials = this.authService.getCredentials();
-        this.store.dispatch(ProfileActions.getProfile(credentials));
+
+        if (credentials.email && credentials.uid && credentials.token) {
+          this.store.dispatch(ProfileActions.getProfile(credentials));
+        }
       }
     });
   }

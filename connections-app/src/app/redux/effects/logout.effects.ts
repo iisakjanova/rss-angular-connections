@@ -7,6 +7,7 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { LogoutService } from 'src/app/services/logout/logout.service';
 
 import * as LogoutActions from '../actions/logout.actions';
+import * as ProfileActions from '../actions/profile.actions';
 
 @Injectable()
 export class LogoutEffects {
@@ -47,6 +48,15 @@ export class LogoutEffects {
             })
           )
       )
+    );
+  });
+
+  removeUserData$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LogoutActions.logoutUserSuccess),
+      map(() => {
+        return ProfileActions.removeProfileInfoFromState();
+      })
     );
   });
 
