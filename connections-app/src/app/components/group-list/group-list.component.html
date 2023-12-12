@@ -1,5 +1,8 @@
 <div class="group-list">
   <div class="group-list__buttons">
+    <p class="countdown" *ngIf="countdown$ | async as countdownValue">
+      {{ countdownValue > 0 && countdownValue !== 60 ? countdownValue : null }}
+    </p>
     <button
       class="group-list__button"
       color="primary"
@@ -9,12 +12,12 @@
     </button>
   </div>
   <mat-nav-list>
-    <p class="group-list__message" *ngIf="($list | async)?.length === 0">
+    <p class="group-list__message" *ngIf="(list$ | async)?.length === 0">
       There is no groups yet
     </p>
     <a
       mat-list-item
-      *ngFor="let item of $list | async"
+      *ngFor="let item of list$ | async"
       [routerLink]="['/group/', item?.id]">
       {{ item?.name }}
     </a>

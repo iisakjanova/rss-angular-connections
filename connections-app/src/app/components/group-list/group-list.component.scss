@@ -7,4 +7,17 @@
     padding: 10px;
     color: white;
   }
+
+  &__buttons {
+    display: flex;
+  }
+}
+
+.countdown {
+  color: #69f0ae;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  justify-self: flex-start;
 }
