@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import {
   selectGroups,
   selectGroupsError,
+  selectGroupsLoading,
 } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
@@ -34,6 +35,8 @@ export class GroupListComponent implements OnInit {
   countdown$ = this.countdownService.countdown$;
 
   error$ = this.store.select(selectGroupsError);
+
+  loading$ = this.store.select(selectGroupsLoading);
 
   private errorSubscription: Subscription | undefined;
 
@@ -73,5 +76,18 @@ export class GroupListComponent implements OnInit {
     });
 
     this.getGroups();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  isButtonDisabled(
+    loading: boolean | null,
+    countdownValue: number | null
+  ): boolean {
+    // If loading is null, treat it as false
+    const isLoading = loading !== null ? loading : false;
+    // If countdownValue is null, treat it as 0
+    const countdown = countdownValue !== null ? countdownValue : 0;
+
+    return isLoading || (countdown < 60 && countdown !== 0);
   }
 }
