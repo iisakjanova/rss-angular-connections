@@ -1,0 +1,11 @@
+.modal {
+  padding: 30px;
+
+  &__title {
+    color: white;
+  }
+
+  ::ng-deep div.mat-mdc-form-field-error-wrapper {
+    position: static;
+  }
+}

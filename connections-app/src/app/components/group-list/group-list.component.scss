@@ -11,6 +11,16 @@
   &__buttons {
     display: flex;
   }
+
+  &__button {
+    margin-left: 5%;
+    margin-right: 5px;
+  }
+
+  &__countdown-wrapper {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .countdown {

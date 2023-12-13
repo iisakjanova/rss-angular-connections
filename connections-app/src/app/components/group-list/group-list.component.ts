@@ -13,6 +13,7 @@ import {
 } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 import * as GroupsActions from '../../redux/actions/groups.actions';
 
@@ -43,7 +44,8 @@ export class GroupListComponent implements OnInit {
   constructor(
     private store: Store,
     private authService: AuthService,
-    private countdownService: CountdownService
+    private countdownService: CountdownService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -76,6 +78,10 @@ export class GroupListComponent implements OnInit {
     });
 
     this.getGroups();
+  }
+
+  onCreateButtonClick() {
+    this.modalService.openDialog();
   }
 
   // eslint-disable-next-line class-methods-use-this

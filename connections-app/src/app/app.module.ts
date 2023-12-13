@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { isDevMode, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,6 +31,7 @@ import { appReducer } from './redux/reducers/app.reducer';
     MatSnackBarModule,
     MatIconModule,
     HttpClientModule,
+    MatDialogModule,
     HeaderComponent,
     StoreModule.forRoot(appReducer, {}),
     EffectsModule.forRoot([

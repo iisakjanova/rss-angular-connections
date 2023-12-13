@@ -1,8 +1,12 @@
 <div class="group-list">
   <div class="group-list__buttons">
-    <p class="countdown" *ngIf="countdown$ | async as countdownValue">
-      {{ countdownValue > 0 && countdownValue !== 60 ? countdownValue : null }}
-    </p>
+    <div class="group-list__countdown-wrapper">
+      <p class="countdown" *ngIf="countdown$ | async as countdownValue">
+        {{
+          countdownValue > 0 && countdownValue !== 60 ? countdownValue : null
+        }}
+      </p>
+    </div>
     <button
       class="group-list__button"
       color="primary"
@@ -10,6 +14,13 @@
       (click)="update()"
       [disabled]="isButtonDisabled(loading$ | async, countdown$ | async)">
       Update
+    </button>
+    <button
+      class="group-list__button"
+      mat-raised-button
+      color="accent"
+      (click)="onCreateButtonClick()">
+      Create
     </button>
   </div>
   <mat-nav-list>
