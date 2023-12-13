@@ -33,7 +33,7 @@ export const groupsReducer = createReducer(
     (state, error): GroupsState => ({
       ...state,
       loading: false,
-      error: error.error,
+      error,
     })
   )
 );

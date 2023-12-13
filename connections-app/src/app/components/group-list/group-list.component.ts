@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import {
   selectGroups,
   selectGroupsError,
@@ -34,6 +35,8 @@ export class GroupListComponent implements OnInit {
 
   error$ = this.store.select(selectGroupsError);
 
+  private errorSubscription: Subscription | undefined;
+
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -54,11 +57,21 @@ export class GroupListComponent implements OnInit {
   }
 
   update() {
-    this.getGroups();
-    this.error$.subscribe(error => {
+    if (this.errorSubscription) {
+      this.errorSubscription.unsubscribe();
+      this.errorSubscription = undefined;
+    }
+
+    // Subscribe to the new error$ observable
+    this.errorSubscription = this.error$.subscribe(error => {
       if (!error) {
         this.countdownService.startCountdown();
+      } else {
+        this.countdownService.stopCountdown();
+        this.countdownService.resetCountdown();
       }
     });
+
+    this.getGroups();
   }
 }

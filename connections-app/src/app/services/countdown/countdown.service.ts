@@ -3,6 +3,7 @@ import {
   BehaviorSubject,
   map,
   Observable,
+  Subscription,
   switchMap,
   takeWhile,
   timer,
@@ -18,8 +19,10 @@ export class CountdownService {
 
   countdown$: Observable<number> = this.countdownSubject.asObservable();
 
+  private countdownSubscription: Subscription | undefined;
+
   startCountdown(): void {
-    timer(0, 1000)
+    this.countdownSubscription = timer(0, 1000)
       .pipe(
         map(n => this.seconds - n - 1),
         takeWhile(n => n >= 0),
@@ -29,5 +32,16 @@ export class CountdownService {
         })
       )
       .subscribe();
+  }
+
+  resetCountdown(): void {
+    this.countdownSubject.next(0);
+  }
+
+  stopCountdown(): void {
+    if (this.countdownSubscription) {
+      this.countdownSubscription.unsubscribe();
+      this.countdownSubscription = undefined;
+    }
   }
 }

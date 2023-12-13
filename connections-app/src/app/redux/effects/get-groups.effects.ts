@@ -25,7 +25,7 @@ export class GetGroupsEffects {
               let message = '';
 
               if (!error.error.message) {
-                message = `No internet connection`;
+                message = `Something is wrong. Try again, please!`;
               } else {
                 message = error.error.message;
               }
