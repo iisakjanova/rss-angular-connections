@@ -39,3 +39,11 @@ export interface SuccessGroupsResponse {
   Count: number;
   Items: Group[];
 }
+
+export interface SuccessCreateGroupResponse {
+  groupID: string;
+  id: string;
+  name: string;
+  createdAt: string;
+  createdBy: string;
+}

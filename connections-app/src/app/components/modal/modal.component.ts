@@ -11,6 +11,8 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Store } from '@ngrx/store';
+import * as GroupsActions from 'src/app/redux/actions/groups.actions';
 
 @Component({
   selector: 'app-modal',
@@ -32,7 +34,8 @@ export class ModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -50,5 +53,9 @@ export class ModalComponent implements OnInit {
 
   onCancelClick(): void {
     this.dialogRef.close();
+  }
+
+  onSubmitClick(): void {
+    this.store.dispatch(GroupsActions.createGroup(this.form.value.name));
   }
 }

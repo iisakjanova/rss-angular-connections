@@ -35,5 +35,30 @@ export const groupsReducer = createReducer(
       loading: false,
       error,
     })
+  ),
+  on(
+    GroupsActions.createGroup,
+    (state): GroupsState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    GroupsActions.createGroupSuccess,
+    (state, { response }): GroupsState => ({
+      ...state,
+      items: [...state.items, response],
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    GroupsActions.createGroupFailure,
+    (state, error): GroupsState => ({
+      ...state,
+      loading: false,
+      error,
+    })
   )
 );
