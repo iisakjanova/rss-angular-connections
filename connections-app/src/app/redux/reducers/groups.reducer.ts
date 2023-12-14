@@ -48,7 +48,15 @@ export const groupsReducer = createReducer(
     GroupsActions.createGroupSuccess,
     (state, { response }): GroupsState => ({
       ...state,
-      items: [...state.items, response],
+      items: [
+        ...state.items,
+        {
+          id: response.groupID,
+          name: response.name,
+          createdAt: response.createdAt,
+          createdBy: response.createdBy,
+        },
+      ],
       loading: false,
       error: null,
     })

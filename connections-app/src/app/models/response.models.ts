@@ -42,7 +42,6 @@ export interface SuccessGroupsResponse {
 
 export interface SuccessCreateGroupResponse {
   groupID: string;
-  id: string;
   name: string;
   createdAt: string;
   createdBy: string;

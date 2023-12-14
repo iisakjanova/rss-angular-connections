@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import * as GroupsActions from 'src/app/redux/actions/groups.actions';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { ModalService } from 'src/app/services/modal/modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -35,7 +37,9 @@ export class ModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
+    private authService: AuthService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,9 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmitClick(): void {
-    this.store.dispatch(GroupsActions.createGroup(this.form.value.name));
+    const createdAt = new Date().getTime().toString();
+    const credentials = this.authService.getCredentials();
+    const params = { ...credentials, name: this.form.value.name, createdAt };
+    this.store.dispatch(GroupsActions.createGroup(params));
   }
 }

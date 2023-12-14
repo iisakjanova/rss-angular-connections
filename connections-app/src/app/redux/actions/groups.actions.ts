@@ -22,7 +22,13 @@ export const getGroupsFailure = createAction(
 
 export const createGroup = createAction(
   '[Groups] Create Group',
-  props<{ email: string; uid: string; token: string; name: string }>()
+  props<{
+    email: string;
+    uid: string;
+    token: string;
+    name: string;
+    createdAt: string;
+  }>()
 );
 
 export const createGroupSuccess = createAction(
