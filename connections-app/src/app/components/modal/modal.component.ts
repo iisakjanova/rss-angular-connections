@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 import * as GroupsActions from 'src/app/redux/actions/groups.actions';
+import { selectGroupsLoading } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ModalService } from 'src/app/services/modal/modal.service';
 
@@ -33,6 +34,8 @@ import { ModalService } from 'src/app/services/modal/modal.service';
 })
 export class ModalComponent implements OnInit {
   form!: FormGroup;
+
+  loading$ = this.store.select(selectGroupsLoading);
 
   constructor(
     public dialogRef: MatDialogRef<ModalComponent>,

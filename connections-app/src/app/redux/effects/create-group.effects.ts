@@ -18,6 +18,11 @@ export class CreateGroupEffects {
           .createGroup(action.email, action.uid, action.token, action.name)
           .pipe(
             map(response => {
+              this.snackBar.open(`Group is created!`, 'Close', {
+                duration: 5000,
+                panelClass: ['success-snackbar'],
+              });
+
               return GroupsActions.createGroupSuccess({
                 response: {
                   ...response,

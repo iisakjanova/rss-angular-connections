@@ -19,7 +19,11 @@
     <button mat-raised-button color="warn" (click)="onCancelClick()">
       Cancel
     </button>
-    <button mat-raised-button color="accent" (click)="onSubmitClick()">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onSubmitClick()"
+      [disabled]="form.invalid || (loading$ | async)">
       Submit
     </button>
   </div>
