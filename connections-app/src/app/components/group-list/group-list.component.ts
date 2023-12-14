@@ -41,12 +41,16 @@ export class GroupListComponent implements OnInit {
 
   private errorSubscription: Subscription | undefined;
 
+  private credentials;
+
   constructor(
     private store: Store,
     private authService: AuthService,
     private countdownService: CountdownService,
     private modalService: ModalService
-  ) {}
+  ) {
+    this.credentials = this.authService.getCredentials();
+  }
 
   ngOnInit(): void {
     this.list$.subscribe(list => {
@@ -57,8 +61,7 @@ export class GroupListComponent implements OnInit {
   }
 
   getGroups() {
-    const credentials = this.authService.getCredentials();
-    this.store.dispatch(GroupsActions.getGroups(credentials));
+    this.store.dispatch(GroupsActions.getGroups(this.credentials));
   }
 
   update() {
@@ -95,5 +98,9 @@ export class GroupListComponent implements OnInit {
     const countdown = countdownValue !== null ? countdownValue : 0;
 
     return isLoading || (countdown < 60 && countdown !== 0);
+  }
+
+  isCurrentUser(createdBy: string): boolean {
+    return this.credentials.uid === createdBy;
   }
 }

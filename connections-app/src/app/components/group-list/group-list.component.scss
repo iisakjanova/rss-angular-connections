@@ -21,6 +21,10 @@
     width: 30px;
     height: 30px;
   }
+
+  &__item {
+    display: flex;
+  }
 }
 
 .countdown {

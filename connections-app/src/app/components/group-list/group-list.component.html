@@ -27,11 +27,16 @@
     <p class="group-list__message" *ngIf="(list$ | async)?.length === 0">
       There is no groups yet
     </p>
-    <a
-      mat-list-item
-      *ngFor="let item of list$ | async"
-      [routerLink]="['/group/', item?.id]">
-      {{ item?.name }}
-    </a>
+    <div class="group-list__item" *ngFor="let item of list$ | async">
+      <a mat-list-item [routerLink]="['/group/', item?.id]">
+        {{ item?.name }}
+      </a>
+      <button
+        *ngIf="isCurrentUser(item.createdBy)"
+        mat-icon-button
+        color="accent">
+        <mat-icon color="warn"> cancel </mat-icon>
+      </button>
+    </div>
   </mat-nav-list>
 </div>
