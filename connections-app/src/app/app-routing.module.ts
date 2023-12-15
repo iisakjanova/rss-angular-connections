@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard } from './guards/auth/auth.guard';
 import { nonAuthGuard } from './guards/non-auth/non-auth.guard';
+import { GroupDialogPageComponent } from './pages/group-dialog-page/group-dialog-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -29,6 +30,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: MainPageComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'group/:groupID',
+    component: GroupDialogPageComponent,
     canActivate: [authGuard],
   },
   { path: '**', component: NotFoundPageComponent },
