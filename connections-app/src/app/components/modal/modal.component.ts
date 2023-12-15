@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -38,7 +38,6 @@ export class ModalComponent implements OnInit {
   loading$ = this.store.select(selectGroupsLoading);
 
   constructor(
-    public dialogRef: MatDialogRef<ModalComponent>,
     private fb: FormBuilder,
     private store: Store,
     private authService: AuthService,
@@ -59,7 +58,7 @@ export class ModalComponent implements OnInit {
   }
 
   onCancelClick(): void {
-    this.dialogRef.close();
+    this.modalService.closeDialog();
   }
 
   onSubmitClick(): void {

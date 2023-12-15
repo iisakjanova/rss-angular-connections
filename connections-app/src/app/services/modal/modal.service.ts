@@ -14,10 +14,6 @@ export class ModalService {
     this.dialogRef = this.dialog.open(ModalComponent);
   }
 
-  getDialogRef(): MatDialogRef<ModalComponent> {
-    return this.dialogRef;
-  }
-
   closeDialog(): void {
     this.dialogRef.close();
   }
