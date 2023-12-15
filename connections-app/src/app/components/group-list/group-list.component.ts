@@ -13,8 +13,8 @@ import {
 } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
+import { CreateModalService } from 'src/app/services/create-modal/create-modal.service';
 import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
-import { ModalService } from 'src/app/services/modal/modal.service';
 
 import * as GroupsActions from '../../redux/actions/groups.actions';
 
@@ -48,7 +48,7 @@ export class GroupListComponent implements OnInit {
     private store: Store,
     private authService: AuthService,
     private countdownService: CountdownService,
-    private modalService: ModalService,
+    private modalService: CreateModalService,
     private deleteModalService: DeleteModalService
   ) {
     this.credentials = this.authService.getCredentials();
@@ -108,8 +108,5 @@ export class GroupListComponent implements OnInit {
 
   onDeleteButtonClick(id: string) {
     this.deleteModalService.openDialog(id);
-    // this.store.dispatch(
-    //   GroupsActions.deleteGroup({ ...this.credentials, groupID: id })
-    // );
   }
 }

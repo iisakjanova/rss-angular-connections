@@ -3,8 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { CreateModalService } from 'src/app/services/create-modal/create-modal.service';
 import { GroupsService } from 'src/app/services/groups/groups.service';
-import { ModalService } from 'src/app/services/modal/modal.service';
 
 import * as GroupsActions from '../actions/groups.actions';
 
@@ -73,6 +73,6 @@ export class CreateGroupEffects {
     private actions$: Actions,
     private groupsService: GroupsService,
     private snackBar: MatSnackBar,
-    private modalService: ModalService
+    private modalService: CreateModalService
   ) {}
 }

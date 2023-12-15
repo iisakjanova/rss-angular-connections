@@ -15,7 +15,7 @@ import { Store } from '@ngrx/store';
 import * as GroupsActions from 'src/app/redux/actions/groups.actions';
 import { selectGroupsLoading } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ModalService } from 'src/app/services/modal/modal.service';
+import { CreateModalService } from 'src/app/services/create-modal/create-modal.service';
 
 @Component({
   selector: 'app-modal',
@@ -29,10 +29,10 @@ import { ModalService } from 'src/app/services/modal/modal.service';
     MatInputModule,
     ReactiveFormsModule,
   ],
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  templateUrl: './create-modal.component.html',
+  styleUrls: ['./create-modal.component.scss'],
 })
-export class ModalComponent implements OnInit {
+export class CreateModalComponent implements OnInit {
   form!: FormGroup;
 
   loading$ = this.store.select(selectGroupsLoading);
@@ -41,7 +41,7 @@ export class ModalComponent implements OnInit {
     private fb: FormBuilder,
     private store: Store,
     private authService: AuthService,
-    private modalService: ModalService
+    private modalService: CreateModalService
   ) {}
 
   ngOnInit(): void {
