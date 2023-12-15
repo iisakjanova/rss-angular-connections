@@ -12,3 +12,13 @@ body {
   margin: 0 auto;
   padding: 0 15px;
 }
+
+.success-snackbar { 
+  --mdc-snackbar-container-color: #69f0ae; 
+}
+
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336; 
+  --mdc-snackbar-supporting-text-color: white; 
+  --mat-snack-bar-button-color: white;
+}
