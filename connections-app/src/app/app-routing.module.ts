@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { authGuard } from './guards/auth/auth.guard';
-import { nonAuthGuard } from './guards/non-auth/non-auth.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
+import { NonAuthGuard } from './guards/non-auth/non-auth.guard';
 import { GroupDialogPageComponent } from './pages/group-dialog-page/group-dialog-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
@@ -14,28 +14,28 @@ const routes: Routes = [
   {
     path: 'signup',
     component: RegistrationPageComponent,
-    canActivate: [nonAuthGuard],
+    canActivate: [NonAuthGuard],
   },
   {
     path: 'signin',
     component: LoginPageComponent,
-    canActivate: [nonAuthGuard],
+    canActivate: [NonAuthGuard],
   },
   {
     path: 'profile',
     component: ProfilePageComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     pathMatch: 'full',
     component: MainPageComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'group/:groupID',
     component: GroupDialogPageComponent,
-    canActivate: [authGuard],
+    canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundPageComponent },
 ];
