@@ -40,3 +40,18 @@ export const createGroupFailure = createAction(
   '[Groups] Create Group Failure',
   props<{ error: ApiError }>()
 );
+
+export const deleteGroup = createAction(
+  '[Groups] Delete Group',
+  props<{ email: string; uid: string; token: string; groupID: string }>()
+);
+
+export const deleteGroupSuccess = createAction(
+  '[Groups] Delete Group Success',
+  props<{ id: string }>()
+);
+
+export const deleteGroupFailure = createAction(
+  '[Groups] Delete Group Failure',
+  props<{ error: ApiError }>()
+);

@@ -68,5 +68,30 @@ export const groupsReducer = createReducer(
       loading: false,
       error,
     })
+  ),
+  on(
+    GroupsActions.deleteGroup,
+    (state): GroupsState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    GroupsActions.deleteGroupSuccess,
+    (state, { id }): GroupsState => ({
+      ...state,
+      items: state.items.filter(item => item.id !== id),
+      loading: false,
+      error: null,
+    })
+  ),
+  on(
+    GroupsActions.deleteGroupFailure,
+    (state, error): GroupsState => ({
+      ...state,
+      loading: false,
+      error,
+    })
   )
 );

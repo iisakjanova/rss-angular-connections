@@ -34,7 +34,8 @@
       <button
         *ngIf="isCurrentUser(item.createdBy)"
         mat-icon-button
-        color="accent">
+        color="accent"
+        (click)="onDeleteButtonClick(item.id)">
         <mat-icon color="warn"> cancel </mat-icon>
       </button>
     </div>

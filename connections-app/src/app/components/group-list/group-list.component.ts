@@ -103,4 +103,10 @@ export class GroupListComponent implements OnInit {
   isCurrentUser(createdBy: string): boolean {
     return this.credentials.uid === createdBy;
   }
+
+  onDeleteButtonClick(id: string) {
+    this.store.dispatch(
+      GroupsActions.deleteGroup({ ...this.credentials, groupID: id })
+    );
+  }
 }
