@@ -52,4 +52,22 @@ export class GroupsService {
       options
     );
   }
+
+  deleteGroup(
+    email: string,
+    uid: string,
+    token: string,
+    groupID: string
+  ): Observable<{ id: string }> {
+    const headers = new HttpHeaders({
+      'rs-email': email,
+      'rs-uid': uid,
+      Authorization: `Bearer ${token}`,
+    });
+
+    const apiUrl = `${this.baseApiUrl}delete?groupID=${groupID}`;
+    const options = { headers };
+
+    return this.http.delete<{ id: string }>(apiUrl, options);
+  }
 }

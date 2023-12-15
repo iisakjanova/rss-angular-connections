@@ -8,6 +8,7 @@ import {
 } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import * as GroupsActions from 'src/app/redux/actions/groups.actions';
+import { selectGroupsLoading } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
 
@@ -19,6 +20,8 @@ import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.s
   styleUrls: ['./delete-modal.component.scss'],
 })
 export class DeleteModalComponent {
+  loading$ = this.store.select(selectGroupsLoading);
+
   constructor(
     public dialogRef: MatDialogRef<DeleteModalComponent>,
     private store: Store,

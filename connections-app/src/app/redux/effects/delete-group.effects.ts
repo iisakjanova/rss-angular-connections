@@ -3,33 +3,28 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { CreateModalService } from 'src/app/services/create-modal/create-modal.service';
+import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
 import { GroupsService } from 'src/app/services/groups/groups.service';
 
 import * as GroupsActions from '../actions/groups.actions';
 
 @Injectable()
-export class CreateGroupEffects {
-  createGroup$ = createEffect(() => {
+export class DeleteGroupEffects {
+  deleteGroup$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GroupsActions.createGroup),
+      ofType(GroupsActions.deleteGroup),
       switchMap(action =>
         this.groupsService
-          .createGroup(action.email, action.uid, action.token, action.name)
+          .deleteGroup(action.email, action.uid, action.token, action.groupID)
           .pipe(
-            map(response => {
-              this.snackBar.open(`Group is created!`, 'Close', {
+            map(() => {
+              this.snackBar.open(`Group is deleted!`, 'Close', {
                 duration: 5000,
                 panelClass: ['success-snackbar'],
               });
 
-              return GroupsActions.createGroupSuccess({
-                response: {
-                  ...response,
-                  name: action.name,
-                  createdAt: action.createdAt,
-                  createdBy: action.uid,
-                },
+              return GroupsActions.deleteGroupSuccess({
+                id: action.groupID,
               });
             }),
             catchError(error => {
@@ -42,7 +37,7 @@ export class CreateGroupEffects {
               }
 
               this.snackBar.open(
-                `Creating a group failed: ${message}`,
+                `Deleting a group failed: ${message}`,
                 'Close',
                 {
                   duration: 5000,
@@ -59,7 +54,7 @@ export class CreateGroupEffects {
   closeDialogOnSuccess$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(GroupsActions.createGroupSuccess),
+        ofType(GroupsActions.deleteGroupSuccess),
         tap(() => {
           this.modalService.closeDialog();
           return []; // return an empty array to signal the effect is done
@@ -73,6 +68,6 @@ export class CreateGroupEffects {
     private actions$: Actions,
     private groupsService: GroupsService,
     private snackBar: MatSnackBar,
-    private modalService: CreateModalService
+    private modalService: DeleteModalService
   ) {}
 }

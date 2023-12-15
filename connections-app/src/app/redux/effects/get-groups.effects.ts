@@ -9,7 +9,7 @@ import * as GroupsActions from '../actions/groups.actions';
 
 @Injectable()
 export class GetGroupsEffects {
-  getgroups$ = createEffect(() => {
+  getGroups$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GroupsActions.getGroups),
       switchMap(action =>
