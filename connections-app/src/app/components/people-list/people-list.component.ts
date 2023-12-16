@@ -32,7 +32,7 @@ import * as GroupsActions from '../../redux/actions/groups.actions';
 export class PeopleListComponent implements OnInit {
   list$ = this.store.select(selectGroups);
 
-  countdown$ = this.countdownService.countdown$;
+  countdown$ = this.countdownService.peopleCountdown$;
 
   error$ = this.store.select(selectGroupsError);
 
@@ -71,10 +71,10 @@ export class PeopleListComponent implements OnInit {
     // Subscribe to the new error$ observable
     this.errorSubscription = this.error$.subscribe(error => {
       if (!error) {
-        this.countdownService.startCountdown();
+        this.countdownService.startPeopleCountdown();
       } else {
-        this.countdownService.stopCountdown();
-        this.countdownService.resetCountdown();
+        this.countdownService.stopPeopleCountdown();
+        this.countdownService.resetPeopleCountdown();
       }
     });
 

@@ -21,6 +21,13 @@ export class CountdownService {
 
   private countdownSubscription: Subscription | undefined;
 
+  private peopleCountdownSubject = new BehaviorSubject<number>(this.seconds);
+
+  peopleCountdown$: Observable<number> =
+    this.peopleCountdownSubject.asObservable();
+
+  private peopleCountdownSubscription: Subscription | undefined;
+
   startCountdown(): void {
     this.countdownSubscription = timer(0, 1000)
       .pipe(
@@ -42,6 +49,30 @@ export class CountdownService {
     if (this.countdownSubscription) {
       this.countdownSubscription.unsubscribe();
       this.countdownSubscription = undefined;
+    }
+  }
+
+  startPeopleCountdown(): void {
+    this.peopleCountdownSubscription = timer(0, 1000)
+      .pipe(
+        map(n => this.seconds - n - 1),
+        takeWhile(n => n >= 0),
+        switchMap(remainingSeconds => {
+          this.peopleCountdownSubject.next(remainingSeconds);
+          return remainingSeconds === 0 ? [] : [remainingSeconds];
+        })
+      )
+      .subscribe();
+  }
+
+  resetPeopleCountdown(): void {
+    this.peopleCountdownSubject.next(0);
+  }
+
+  stopPeopleCountdown(): void {
+    if (this.peopleCountdownSubscription) {
+      this.peopleCountdownSubscription.unsubscribe();
+      this.peopleCountdownSubscription = undefined;
     }
   }
 }
