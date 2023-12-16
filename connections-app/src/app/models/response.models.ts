@@ -46,3 +46,13 @@ export interface SuccessCreateGroupResponse {
   createdAt: string;
   createdBy: string;
 }
+
+export interface Person {
+  uid: { S: string };
+  name: { S: string };
+}
+
+export interface SuccessPeopleResponse {
+  Count: number;
+  Items: Person[];
+}
