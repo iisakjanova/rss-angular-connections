@@ -1,0 +1,29 @@
+<div class="people-list">
+  <div class="people-list__buttons">
+    <div class="people-list__countdown-wrapper">
+      <p class="countdown" *ngIf="countdown$ | async as countdownValue">
+        {{
+          countdownValue > 0 && countdownValue !== 60 ? countdownValue : null
+        }}
+      </p>
+    </div>
+    <button
+      class="people-list__button"
+      color="primary"
+      mat-raised-button
+      (click)="update()"
+      [disabled]="isButtonDisabled(loading$ | async, countdown$ | async)">
+      Update
+    </button>
+  </div>
+  <mat-nav-list>
+    <p class="people-list__message" *ngIf="(list$ | async)?.length === 0">
+      There is no users fetched
+    </p>
+    <div class="people-list__item" *ngFor="let item of list$ | async">
+      <a mat-list-item [routerLink]="['/conversation/', item?.id]">
+        {{ item?.name }}
+      </a>
+    </div>
+  </mat-nav-list>
+</div>
