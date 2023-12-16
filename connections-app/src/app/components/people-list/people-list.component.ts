@@ -7,14 +7,14 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import {
-  selectGroups,
-  selectGroupsError,
-  selectGroupsLoading,
-} from 'src/app/redux/selectors/groups.selectors';
+  selectPeople,
+  selectPeopleError,
+  selectPeopleLoading,
+} from 'src/app/redux/selectors/people.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
 
-import * as GroupsActions from '../../redux/actions/groups.actions';
+import * as PeopleActions from '../../redux/actions/people.actions';
 
 @Component({
   selector: 'app-people-list',
@@ -30,13 +30,13 @@ import * as GroupsActions from '../../redux/actions/groups.actions';
   styleUrls: ['./people-list.component.scss'],
 })
 export class PeopleListComponent implements OnInit {
-  list$ = this.store.select(selectGroups);
+  list$ = this.store.select(selectPeople);
 
   countdown$ = this.countdownService.peopleCountdown$;
 
-  error$ = this.store.select(selectGroupsError);
+  error$ = this.store.select(selectPeopleError);
 
-  loading$ = this.store.select(selectGroupsLoading);
+  loading$ = this.store.select(selectPeopleLoading);
 
   private errorSubscription: Subscription | undefined;
 
@@ -53,13 +53,13 @@ export class PeopleListComponent implements OnInit {
   ngOnInit(): void {
     this.list$.subscribe(list => {
       if (list.length === 0) {
-        this.getGroups();
+        this.getPeople();
       }
     });
   }
 
-  getGroups() {
-    this.store.dispatch(GroupsActions.getGroups(this.credentials));
+  getPeople() {
+    this.store.dispatch(PeopleActions.getPeople(this.credentials));
   }
 
   update() {
@@ -78,7 +78,7 @@ export class PeopleListComponent implements OnInit {
       }
     });
 
-    this.getGroups();
+    this.getPeople();
   }
 
   // eslint-disable-next-line class-methods-use-this
