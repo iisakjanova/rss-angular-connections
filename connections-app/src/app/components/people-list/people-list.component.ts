@@ -5,7 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
+import { selectConversations } from 'src/app/redux/selectors/conversations.selectors';
 import {
   selectPeople,
   selectPeopleError,
@@ -32,6 +33,8 @@ import * as PeopleActions from '../../redux/actions/people.actions';
 })
 export class PeopleListComponent implements OnInit {
   list$ = this.store.select(selectPeople);
+
+  conversations$ = this.store.select(selectConversations);
 
   countdown$ = this.countdownService.peopleCountdown$;
 
@@ -105,5 +108,16 @@ export class PeopleListComponent implements OnInit {
 
   onPersonClick(uid: string) {
     this.store.dispatch(PeopleActions.addChosenPerson({ uid }));
+  }
+
+  getConversationId(uid: string): Observable<string> {
+    return this.conversations$.pipe(
+      map(conversations => {
+        const matchingConversation = conversations.find(
+          conversation => conversation.companionID === uid
+        );
+        return matchingConversation ? matchingConversation.id : '';
+      })
+    );
   }
 }

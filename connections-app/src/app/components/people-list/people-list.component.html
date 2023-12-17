@@ -22,8 +22,9 @@
     </p>
     <div class="people-list__item" *ngFor="let item of list$ | async">
       <a
+        [class.highlighted]="getConversationId(item.uid) | async"
         mat-list-item
-        [routerLink]="['/conversation/', '']"
+        [routerLink]="['/conversation/', getConversationId(item.uid) | async]"
         (click)="onPersonClick(item.uid)">
         {{ item?.name }}
       </a>
