@@ -18,3 +18,8 @@ export const getPeopleFailure = createAction(
   '[People] Get People Failure',
   props<{ error: ApiError }>()
 );
+
+export const addChosenPerson = createAction(
+  '[People] Add ChosenPerson',
+  props<{ uid: string }>()
+);

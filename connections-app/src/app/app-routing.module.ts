@@ -9,6 +9,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { conversationResolver } from './resolvers/conversation/conversation.resolver';
 
 const routes: Routes = [
   {
@@ -36,6 +37,13 @@ const routes: Routes = [
     path: 'group/:groupID',
     component: GroupDialogPageComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'conversation/:conversationId',
+    component: GroupDialogPageComponent,
+    resolve: {
+      conversationExists: conversationResolver,
+    },
   },
   { path: '**', component: NotFoundPageComponent },
 ];

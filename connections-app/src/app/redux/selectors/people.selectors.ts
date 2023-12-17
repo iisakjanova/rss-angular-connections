@@ -18,3 +18,8 @@ export const selectPeople = createSelector(
   selectPeopleState,
   state => state.items
 );
+
+export const selectCompanionId = createSelector(
+  selectPeopleState,
+  state => state.chosenPerson
+);

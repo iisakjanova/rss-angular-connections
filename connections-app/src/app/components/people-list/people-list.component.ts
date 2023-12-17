@@ -42,6 +42,17 @@ export class PeopleListComponent implements OnInit {
 
   private credentials;
 
+  private conversations = [
+    {
+      id: '1',
+      companionID: '123',
+    },
+    {
+      id: '2',
+      companionID: '1234',
+    },
+  ];
+
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -92,5 +103,9 @@ export class PeopleListComponent implements OnInit {
     const countdown = countdownValue !== null ? countdownValue : 0;
 
     return isLoading || (countdown < 60 && countdown !== 0);
+  }
+
+  onPersonClick(uid: string) {
+    this.store.dispatch(PeopleActions.addChosenPerson({ uid }));
   }
 }

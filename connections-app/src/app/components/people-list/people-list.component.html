@@ -21,7 +21,10 @@
       There is no users fetched
     </p>
     <div class="people-list__item" *ngFor="let item of list$ | async">
-      <a mat-list-item [routerLink]="['/conversation/', item?.uid]">
+      <a
+        mat-list-item
+        [routerLink]="['/conversation/', '']"
+        (click)="onPersonClick(item.uid)">
         {{ item?.name }}
       </a>
     </div>

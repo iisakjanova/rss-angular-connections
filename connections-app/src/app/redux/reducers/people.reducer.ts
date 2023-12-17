@@ -33,5 +33,12 @@ export const peopleReducer = createReducer(
       loading: false,
       error,
     })
+  ),
+  on(
+    PeopleActions.addChosenPerson,
+    (state, person): PeopleState => ({
+      ...state,
+      chosenPerson: person.uid,
+    })
   )
 );

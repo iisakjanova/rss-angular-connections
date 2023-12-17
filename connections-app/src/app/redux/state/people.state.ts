@@ -7,12 +7,14 @@ export interface PeopleItem {
 
 export interface PeopleState {
   items: PeopleItem[];
+  chosenPerson: string;
   loading: boolean;
   error: null | ApiError;
 }
 
 export const initialPeopleState: PeopleState = {
   items: [],
+  chosenPerson: '',
   loading: false,
   error: null,
 };
