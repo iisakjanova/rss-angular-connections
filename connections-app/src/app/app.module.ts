@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { CreateGroupEffects } from './redux/effects/create-group.effects';
 import { DeleteGroupEffects } from './redux/effects/delete-group.effects';
+import { GetConversationsEffects } from './redux/effects/get-conversations.effects';
 import { GetGroupsEffects } from './redux/effects/get-groups.effects';
 import { GetPeopleEffects } from './redux/effects/get-people.effects';
 import { GetProfileEffects } from './redux/effects/get-profile.effects';
@@ -47,6 +48,7 @@ import { appReducer } from './redux/reducers/app.reducer';
       CreateGroupEffects,
       DeleteGroupEffects,
       GetPeopleEffects,
+      GetConversationsEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],

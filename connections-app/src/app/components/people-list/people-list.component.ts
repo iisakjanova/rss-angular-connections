@@ -14,6 +14,7 @@ import {
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
 
+import * as ConversationsActions from '../../redux/actions/conversations.actions';
 import * as PeopleActions from '../../redux/actions/people.actions';
 
 @Component({
@@ -42,17 +43,6 @@ export class PeopleListComponent implements OnInit {
 
   private credentials;
 
-  private conversations = [
-    {
-      id: '1',
-      companionID: '123',
-    },
-    {
-      id: '2',
-      companionID: '1234',
-    },
-  ];
-
   constructor(
     private store: Store,
     private authService: AuthService,
@@ -65,12 +55,19 @@ export class PeopleListComponent implements OnInit {
     this.list$.subscribe(list => {
       if (list.length === 0) {
         this.getPeople();
+        this.getConversations();
       }
     });
   }
 
   getPeople() {
     this.store.dispatch(PeopleActions.getPeople(this.credentials));
+  }
+
+  getConversations() {
+    this.store.dispatch(
+      ConversationsActions.getConversations(this.credentials)
+    );
   }
 
   update() {
@@ -90,6 +87,7 @@ export class PeopleListComponent implements OnInit {
     });
 
     this.getPeople();
+    this.getConversations();
   }
 
   // eslint-disable-next-line class-methods-use-this
