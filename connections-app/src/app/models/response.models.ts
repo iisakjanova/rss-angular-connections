@@ -56,3 +56,13 @@ export interface SuccessPeopleResponse {
   Count: number;
   Items: Person[];
 }
+
+export interface Conversation {
+  id: { S: string };
+  companionID: { S: string };
+}
+
+export interface SuccessConversationsResponse {
+  Count: number;
+  Items: Conversation[];
+}

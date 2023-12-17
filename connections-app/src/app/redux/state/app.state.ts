@@ -1,3 +1,4 @@
+import { ConversationsState } from './conversations.state';
 import { GroupsState } from './groups.state';
 import { LoginState } from './login.state';
 import { LogoutState } from './logout.state';
@@ -12,4 +13,5 @@ export interface AppState {
   logout: LogoutState;
   groups: GroupsState;
   people: PeopleState;
+  conversations: ConversationsState;
 }
