@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationExtras, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
@@ -22,6 +23,14 @@ export class DeleteGroupEffects {
                 duration: 5000,
                 panelClass: ['success-snackbar'],
               });
+
+              const redirectUrl = '/';
+
+              const navigationExtras: NavigationExtras = {
+                queryParamsHandling: 'preserve',
+              };
+
+              this.router.navigate([redirectUrl], navigationExtras);
 
               return GroupsActions.deleteGroupSuccess({
                 id: action.groupID,
@@ -68,6 +77,7 @@ export class DeleteGroupEffects {
     private actions$: Actions,
     private groupsService: GroupsService,
     private snackBar: MatSnackBar,
-    private modalService: DeleteModalService
+    private modalService: DeleteModalService,
+    public router: Router
   ) {}
 }
