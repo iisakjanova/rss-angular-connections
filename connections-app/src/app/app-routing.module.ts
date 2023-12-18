@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ConversationPageComponent } from './components/conversation-page/conversation-page.component';
 import { AuthGuard } from './guards/auth/auth.guard';
 import { NonAuthGuard } from './guards/non-auth/non-auth.guard';
 import { GroupDialogPageComponent } from './pages/group-dialog-page/group-dialog-page.component';
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'conversation/:conversationId',
-    component: GroupDialogPageComponent,
+    component: ConversationPageComponent,
     resolve: {
       conversationExists: conversationResolver,
     },
