@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, switchMap } from 'rxjs';
+import { catchError, Observable, of, switchMap, take, tap } from 'rxjs';
 import { SuccessConversationsResponse } from 'src/app/models/response.models';
+import * as ConversationsActions from 'src/app/redux/actions/conversations.actions';
 import { selectCompanionId } from 'src/app/redux/selectors/people.selectors';
 
 @Injectable({
@@ -39,14 +40,19 @@ export class ConversationService {
     uid: string,
     token: string
   ): Observable<{ conversationID: string }> {
+    let companion: string;
+
     return this.companionID$.pipe(
-      switchMap(companion => {
+      take(1),
+      tap(companionValue => {
+        companion = companionValue;
+      }),
+      switchMap(() => {
         const headers = new HttpHeaders({
           'rs-email': email,
           'rs-uid': uid,
           Authorization: `Bearer ${token}`,
         });
-
         const apiUrl = `${this.baseApiUrl}create`;
         const requestBody = { companion };
         const options = { headers };
@@ -56,6 +62,21 @@ export class ConversationService {
           requestBody,
           options
         );
+      }),
+      switchMap(response => {
+        this.store.dispatch(
+          ConversationsActions.createConversationSuccess({
+            response,
+            companion,
+          })
+        );
+        return of(response);
+      }),
+      catchError(error => {
+        this.store.dispatch(
+          ConversationsActions.createConversationFailure(error)
+        );
+        return of(error);
       })
     );
   }

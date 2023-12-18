@@ -1,6 +1,8 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { catchError, of, switchMap } from 'rxjs';
+import * as ConversationActions from 'src/app/redux/actions/conversations.actions';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ConversationService } from 'src/app/services/conversation/conversation.service';
 
@@ -13,8 +15,10 @@ export const conversationResolver: ResolveFn<boolean> = (
   const credentials = authService.getCredentials();
 
   const router = inject(Router);
+  const store = inject(Store);
 
   if (!conversationID) {
+    store.dispatch(ConversationActions.createConversation());
     return conversationService
       .createConversation(credentials.email, credentials.token, credentials.uid)
       .pipe(
@@ -25,7 +29,7 @@ export const conversationResolver: ResolveFn<boolean> = (
             router.navigate(['/conversation/', newConversationID]);
             return of(true);
           }
-          console.error('Invalid response format');
+
           router.navigate(['/']);
           return of(false);
         }),

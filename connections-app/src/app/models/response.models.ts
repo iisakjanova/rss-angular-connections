@@ -7,6 +7,11 @@ export interface ApiError {
   type: string;
 }
 
+export interface ApiFailureError {
+  type: string;
+  message: string;
+}
+
 export interface SuccessRegistrationResponse {
   statusCode: number;
 }

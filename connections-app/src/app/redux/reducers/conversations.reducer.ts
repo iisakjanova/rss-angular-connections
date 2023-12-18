@@ -39,5 +39,38 @@ export const conversationsReducer = createReducer(
       loading: false,
       error,
     })
+  ),
+  on(
+    ConversationsActions.createConversation,
+    (state): ConversationsState => ({
+      ...state,
+      loading: true,
+      error: null,
+    })
+  ),
+  on(
+    ConversationsActions.createConversationSuccess,
+    (state, { response, companion }): ConversationsState => {
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          {
+            id: response.conversationID,
+            companionID: companion,
+          },
+        ],
+        loading: false,
+        error: null,
+      };
+    }
+  ),
+  on(
+    ConversationsActions.createConversationFailure,
+    (state, error): ConversationsState => ({
+      ...state,
+      loading: false,
+      error,
+    })
   )
 );

@@ -13,6 +13,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/header/header.component';
+import { CreateConversationEffects } from './redux/effects/create-conversation.effects';
 import { CreateGroupEffects } from './redux/effects/create-group.effects';
 import { DeleteGroupEffects } from './redux/effects/delete-group.effects';
 import { GetConversationsEffects } from './redux/effects/get-conversations.effects';
@@ -49,6 +50,7 @@ import { appReducer } from './redux/reducers/app.reducer';
       DeleteGroupEffects,
       GetPeopleEffects,
       GetConversationsEffects,
+      CreateConversationEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
