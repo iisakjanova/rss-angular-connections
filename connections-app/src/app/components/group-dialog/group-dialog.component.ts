@@ -11,6 +11,7 @@ import {
 } from 'src/app/redux/selectors/groups.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
+import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
 
 @Component({
   selector: 'app-group-dialog',
@@ -38,7 +39,8 @@ export class GroupDialogComponent {
     private countdownService: CountdownService,
     private store: Store,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private deleteModalService: DeleteModalService
   ) {
     this.credentials = this.authService.getCredentials();
     this.route.params.subscribe(params => {
@@ -90,5 +92,9 @@ export class GroupDialogComponent {
         return of(this.credentials.uid === createdBy);
       })
     );
+  }
+
+  onDeleteButtonClick() {
+    this.deleteModalService.openDialog(this.groupId);
   }
 }

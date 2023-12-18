@@ -16,6 +16,7 @@
       Update
     </button>
     <button
+      (click)="onDeleteButtonClick()"
       *ngIf="isCurrentUser$ | async"
       class="group-dialog__button"
       color="warn"
