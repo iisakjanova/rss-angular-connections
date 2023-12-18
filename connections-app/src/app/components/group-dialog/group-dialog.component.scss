@@ -1,9 +1,25 @@
 .group-dialog {
   &__buttons {
     display: flex;
+    padding: 10px;
   }
 
   &__button {
-    margin: 5px 5px;
+    margin-left: 5px;
+    margin-right: 5px;
   }
+
+  &__countdown-wrapper {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.countdown {
+  color: #69f0ae;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  justify-self: flex-start;
 }

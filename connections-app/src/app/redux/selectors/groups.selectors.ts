@@ -18,3 +18,8 @@ export const selectGroups = createSelector(
   selectGroupsState,
   state => state.items
 );
+
+export const selectGroupById = (groupId: string) =>
+  createSelector(selectGroupsState, state =>
+    state.items.find(group => group.id === groupId)
+  );

@@ -1,9 +1,25 @@
 <div class="group-dialog">
   <div class="group-dialog__buttons">
-    <button class="group-dialog__button" color="primary" mat-raised-button>
+    <div class="group-dialog__countdown-wrapper">
+      <p class="countdown" *ngIf="countdown$ | async as countdownValue">
+        {{
+          countdownValue > 0 && countdownValue !== 60 ? countdownValue : null
+        }}
+      </p>
+    </div>
+    <button
+      (click)="update()"
+      [disabled]="isButtonDisabled(loading$ | async, countdown$ | async)"
+      class="group-dialog__button"
+      color="primary"
+      mat-raised-button>
       Update
     </button>
-    <button class="group-dialog__button" color="warn" mat-raised-button>
+    <button
+      *ngIf="isCurrentUser$ | async"
+      class="group-dialog__button"
+      color="warn"
+      mat-raised-button>
       Delete
     </button>
   </div>

@@ -28,6 +28,15 @@ export class CountdownService {
 
   private peopleCountdownSubscription: Subscription | undefined;
 
+  private groupDialogCountdownSubject = new BehaviorSubject<number>(
+    this.seconds
+  );
+
+  groupDialogCountdown$: Observable<number> =
+    this.groupDialogCountdownSubject.asObservable();
+
+  private groupDialogCountdownSubscription: Subscription | undefined;
+
   startCountdown(): void {
     this.countdownSubscription = timer(0, 1000)
       .pipe(
@@ -73,6 +82,30 @@ export class CountdownService {
     if (this.peopleCountdownSubscription) {
       this.peopleCountdownSubscription.unsubscribe();
       this.peopleCountdownSubscription = undefined;
+    }
+  }
+
+  startGroupDialogCountdown(): void {
+    this.groupDialogCountdownSubscription = timer(0, 1000)
+      .pipe(
+        map(n => this.seconds - n - 1),
+        takeWhile(n => n >= 0),
+        switchMap(remainingSeconds => {
+          this.groupDialogCountdownSubject.next(remainingSeconds);
+          return remainingSeconds === 0 ? [] : [remainingSeconds];
+        })
+      )
+      .subscribe();
+  }
+
+  resetGroupDialogCountdown(): void {
+    this.groupDialogCountdownSubject.next(0);
+  }
+
+  stopGroupDialogCountdown(): void {
+    if (this.groupDialogCountdownSubscription) {
+      this.groupDialogCountdownSubscription.unsubscribe();
+      this.groupDialogCountdownSubscription = undefined;
     }
   }
 }
