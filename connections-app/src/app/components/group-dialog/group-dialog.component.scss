@@ -1,4 +1,10 @@
 .group-dialog {
+  &__title {
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+  }
+
   &__buttons {
     display: flex;
     padding: 10px;

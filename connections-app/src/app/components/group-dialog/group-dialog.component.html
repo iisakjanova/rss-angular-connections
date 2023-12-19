@@ -1,4 +1,7 @@
 <div class="group-dialog">
+  <h2 class="mat-headline-5 group-dialog__title">
+    {{ (group$ | async)?.name }}
+  </h2>
   <div class="group-dialog__buttons">
     <div class="group-dialog__countdown-wrapper">
       <p class="countdown" *ngIf="countdown$ | async as countdownValue">

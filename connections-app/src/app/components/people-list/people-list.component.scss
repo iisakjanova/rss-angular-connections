@@ -1,4 +1,10 @@
 .people-list {
+  &__title {
+    padding-top: 20px;
+    text-align: center;
+    color: white;
+  }
+
   &__buttons {
     padding: 10px;
     display: flex;
