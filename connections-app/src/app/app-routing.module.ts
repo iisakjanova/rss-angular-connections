@@ -11,6 +11,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { conversationResolver } from './resolvers/conversation/conversation.resolver';
+import { groupExistsResolver } from './resolvers/group/group-exists.resolver';
 
 const routes: Routes = [
   {
@@ -38,6 +39,9 @@ const routes: Routes = [
     path: 'group/:groupID',
     component: GroupDialogPageComponent,
     canActivate: [AuthGuard],
+    resolve: {
+      groupExists: groupExistsResolver,
+    },
   },
   {
     path: 'conversation/:conversationId',
