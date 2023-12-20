@@ -71,3 +71,14 @@ export interface SuccessConversationsResponse {
   Count: number;
   Items: Conversation[];
 }
+
+export interface Message {
+  authorID: { S: string };
+  message: { S: string };
+  createdAt: { S: string };
+}
+
+export interface SuccessMessagesResponse {
+  Count: number;
+  Items: Message[];
+}
