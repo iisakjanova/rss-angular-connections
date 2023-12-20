@@ -28,7 +28,7 @@
     </button>
   </div>
   <div class="messages-list">
-    <p class="group-list__message" *ngIf="(list$ | async)?.length === 0">
+    <p class="messages-list__message" *ngIf="(list$ | async)?.length === 0">
       There is no messages yet
     </p>
     <mat-card *ngFor="let item of items$ | async" class="messages-list__item">

@@ -61,13 +61,18 @@ export class GroupDialogComponent implements OnInit {
     this.list$,
     this.users$,
   ]).pipe(
-    map(([messages, users]) =>
-      messages.map(message => ({
+    map(([messages, users]) => {
+      // Check if either messages or users is undefined
+      if (!messages || !users) {
+        return [];
+      }
+
+      return messages.map(message => ({
         ...message,
         name:
           users.find(user => user.uid === message.authorID)?.name || 'Unknown',
-      }))
-    )
+      }));
+    })
   );
 
   constructor(
@@ -87,7 +92,7 @@ export class GroupDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.list$.pipe(take(1)).subscribe(list => {
-      if (list.length === 0) {
+      if (!list || list.length === 0) {
         this.getMessages();
       }
     });
