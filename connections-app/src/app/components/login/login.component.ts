@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -28,6 +29,7 @@ import * as LoginActions from '../../redux/actions/login.actions';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -42,6 +44,8 @@ export class LoginComponent implements OnInit {
   submittedEmailValue = '';
 
   submittedPasswordValue = '';
+
+  hide = true;
 
   constructor(
     private fb: FormBuilder,
@@ -62,5 +66,9 @@ export class LoginComponent implements OnInit {
       this.submittedPasswordValue = this.form.get('password')?.value;
       this.store.dispatch(LoginActions.loginUser({ email, password }));
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 }

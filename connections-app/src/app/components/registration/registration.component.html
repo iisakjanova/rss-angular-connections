@@ -24,7 +24,17 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput formControlName="password" />
+    <input
+      [type]="hide ? 'password' : 'text'"
+      matInput
+      formControlName="password" />
+    <button
+      class="icon-hide"
+      mat-icon-button
+      matSuffix
+      (click)="togglePasswordVisibility()">
+      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
     <mat-error *ngIf="form.get('password')?.hasError('required')">
       Please enter a password
     </mat-error>

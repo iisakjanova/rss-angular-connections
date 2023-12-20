@@ -11,6 +11,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -72,6 +73,7 @@ export const passwordStrengthValidator = (
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
+    MatIconModule,
   ],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
@@ -84,6 +86,8 @@ export class RegistrationComponent implements OnInit {
   error$ = this.store.select(selectRegistrationError);
 
   submittedEmailValue = '';
+
+  hide = true;
 
   constructor(
     private fb: FormBuilder,
@@ -113,5 +117,9 @@ export class RegistrationComponent implements OnInit {
         RegistrationActions.registerUser({ name: firstName, email, password })
       );
     }
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 }
