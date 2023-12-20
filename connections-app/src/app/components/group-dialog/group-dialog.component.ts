@@ -25,6 +25,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
 import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
 
+import * as PeopleActions from '../../redux/actions/people.actions';
+
 interface MessageItemFull {
   name: string;
   message: string;
@@ -94,6 +96,7 @@ export class GroupDialogComponent implements OnInit {
     this.list$.pipe(take(1)).subscribe(list => {
       if (!list || list.length === 0) {
         this.getMessages();
+        this.getPeople();
       }
     });
   }
@@ -109,6 +112,10 @@ export class GroupDialogComponent implements OnInit {
         groupID: this.groupId,
       })
     );
+  }
+
+  getPeople() {
+    this.store.dispatch(PeopleActions.getPeople(this.credentials));
   }
 
   update() {
@@ -128,6 +135,7 @@ export class GroupDialogComponent implements OnInit {
     });
 
     this.getMessages();
+    this.getPeople();
   }
 
   // eslint-disable-next-line class-methods-use-this
