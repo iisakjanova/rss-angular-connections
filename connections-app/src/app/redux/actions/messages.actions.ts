@@ -6,7 +6,7 @@ import {
 
 export const getMessages = createAction(
   '[Messages] Get Messages',
-  props<{ email: string; uid: string; token: string }>()
+  props<{ email: string; uid: string; token: string; groupID: string }>()
 );
 
 export const getMessagesSuccess = createAction(

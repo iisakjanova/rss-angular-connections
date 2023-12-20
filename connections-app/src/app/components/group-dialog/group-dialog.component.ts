@@ -4,11 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of, Subscription, switchMap, take } from 'rxjs';
+import * as MessagesActions from 'src/app/redux/actions/messages.actions';
+import { selectGroupById } from 'src/app/redux/selectors/groups.selectors';
 import {
-  selectGroupById,
-  selectGroupsError,
-  selectGroupsLoading,
-} from 'src/app/redux/selectors/groups.selectors';
+  selectMessagesError,
+  selectMessagesLoading,
+} from 'src/app/redux/selectors/messages.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
 import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
@@ -23,9 +24,9 @@ import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.s
 export class GroupDialogComponent {
   countdown$ = this.countdownService.groupDialogCountdown$;
 
-  loading$ = this.store.select(selectGroupsLoading);
+  loading$ = this.store.select(selectMessagesLoading);
 
-  error$ = this.store.select(selectGroupsError);
+  error$ = this.store.select(selectMessagesError);
 
   private errorSubscription: Subscription | undefined;
 
@@ -54,6 +55,15 @@ export class GroupDialogComponent {
     return this.store.select(selectGroupById(this.groupId));
   }
 
+  getMessages() {
+    this.store.dispatch(
+      MessagesActions.getMessages({
+        ...this.credentials,
+        groupID: this.groupId,
+      })
+    );
+  }
+
   update() {
     if (this.errorSubscription) {
       this.errorSubscription.unsubscribe();
@@ -69,6 +79,8 @@ export class GroupDialogComponent {
         this.countdownService.resetGroupDialogCountdown();
       }
     });
+
+    this.getMessages();
   }
 
   // eslint-disable-next-line class-methods-use-this

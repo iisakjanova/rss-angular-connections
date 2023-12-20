@@ -18,6 +18,7 @@ import { CreateGroupEffects } from './redux/effects/create-group.effects';
 import { DeleteGroupEffects } from './redux/effects/delete-group.effects';
 import { GetConversationsEffects } from './redux/effects/get-conversations.effects';
 import { GetGroupsEffects } from './redux/effects/get-groups.effects';
+import { GetMessagesEffects } from './redux/effects/get-messages.effects';
 import { GetPeopleEffects } from './redux/effects/get-people.effects';
 import { GetProfileEffects } from './redux/effects/get-profile.effects';
 import { LoginEffects } from './redux/effects/login.effects';
@@ -51,6 +52,7 @@ import { appReducer } from './redux/reducers/app.reducer';
       GetPeopleEffects,
       GetConversationsEffects,
       CreateConversationEffects,
+      GetMessagesEffects,
     ]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
