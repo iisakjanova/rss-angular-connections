@@ -1,8 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  ApiError,
-  SuccessRegistrationResponse,
-} from 'src/app/models/response.models';
+import { ApiError } from 'src/app/models/response.models';
 
 export const registerUser = createAction(
   '[Registration] Register User',
@@ -10,8 +7,7 @@ export const registerUser = createAction(
 );
 
 export const registerUserSuccess = createAction(
-  '[Registration] Register User Success',
-  props<{ response: SuccessRegistrationResponse }>()
+  '[Registration] Register User Success'
 );
 
 export const registerUserFailure = createAction(

@@ -17,7 +17,7 @@ export class RegistrationEffects {
         this.registrationService
           .registerUser(action.email, action.name, action.password)
           .pipe(
-            map(response => {
+            map(() => {
               this.snackBar.open(`Registration successful!`, 'Close', {
                 duration: 5000,
                 panelClass: ['success-snackbar'],
@@ -29,9 +29,7 @@ export class RegistrationEffects {
               };
 
               this.router.navigate([redirectUrl], navigationExtras);
-              return RegistrationActions.registerUserSuccess({
-                response: response.data,
-              });
+              return RegistrationActions.registerUserSuccess();
             }),
             catchError(error => {
               let message = '';
