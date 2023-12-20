@@ -1,27 +1,44 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, of, Subscription, switchMap, take } from 'rxjs';
+import {
+  combineLatest,
+  map,
+  Observable,
+  of,
+  Subscription,
+  switchMap,
+  take,
+} from 'rxjs';
 import * as MessagesActions from 'src/app/redux/actions/messages.actions';
 import { selectGroupById } from 'src/app/redux/selectors/groups.selectors';
 import {
+  selectMessages,
   selectMessagesError,
   selectMessagesLoading,
 } from 'src/app/redux/selectors/messages.selectors';
+import { selectPeople } from 'src/app/redux/selectors/people.selectors';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CountdownService } from 'src/app/services/countdown/countdown.service';
 import { DeleteModalService } from 'src/app/services/delete-modal/delete-modal.service';
 
+interface MessageItemFull {
+  name: string;
+  message: string;
+  createdAt: string;
+}
+
 @Component({
   selector: 'app-group-dialog',
   standalone: true,
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule],
   templateUrl: './group-dialog.component.html',
   styleUrls: ['./group-dialog.component.scss'],
 })
-export class GroupDialogComponent {
+export class GroupDialogComponent implements OnInit {
   countdown$ = this.countdownService.groupDialogCountdown$;
 
   loading$ = this.store.select(selectMessagesLoading);
@@ -36,6 +53,23 @@ export class GroupDialogComponent {
 
   isCurrentUser$: Observable<boolean>;
 
+  list$ = this.store.select(selectMessages);
+
+  users$ = this.store.select(selectPeople);
+
+  items$: Observable<MessageItemFull[]> = combineLatest([
+    this.list$,
+    this.users$,
+  ]).pipe(
+    map(([messages, users]) =>
+      messages.map(message => ({
+        ...message,
+        name:
+          users.find(user => user.uid === message.authorID)?.name || 'Unknown',
+      }))
+    )
+  );
+
   constructor(
     private countdownService: CountdownService,
     private store: Store,
@@ -49,6 +83,14 @@ export class GroupDialogComponent {
     });
 
     this.isCurrentUser$ = this.isCurrentUser();
+  }
+
+  ngOnInit(): void {
+    this.list$.subscribe(list => {
+      if (list.length === 0) {
+        this.getMessages();
+      }
+    });
   }
 
   get group$() {
@@ -108,5 +150,13 @@ export class GroupDialogComponent {
 
   onDeleteButtonClick() {
     this.deleteModalService.openDialog(this.groupId);
+  }
+
+  getUserNameById(userId: string): Observable<string | undefined> {
+    return this.users$.pipe(
+      take(1),
+      switchMap(users => of(users.find(user => user.uid === userId))),
+      map(user => user?.name ?? 'DefaultName')
+    );
   }
 }

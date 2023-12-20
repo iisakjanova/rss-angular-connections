@@ -27,4 +27,16 @@
       Delete
     </button>
   </div>
+  <div class="messages-list">
+    <p class="group-list__message" *ngIf="(list$ | async)?.length === 0">
+      There is no messages yet
+    </p>
+    <mat-card *ngFor="let item of items$ | async" class="messages-list__item">
+      <mat-card-content>
+        <p>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
+        <p>{{ item.name }}</p>
+        <p>{{ item.message }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

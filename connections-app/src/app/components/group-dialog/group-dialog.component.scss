@@ -29,3 +29,11 @@
   line-height: 30px;
   justify-self: flex-start;
 }
+
+.messages-list{
+  &__item {
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    color: white;
+  }
+}
