@@ -31,6 +31,7 @@ interface MessageItemFull {
   name: string;
   message: string;
   createdAt: string;
+  authorID: string;
 }
 
 @Component({
@@ -49,7 +50,7 @@ export class GroupDialogComponent implements OnInit {
 
   private errorSubscription: Subscription | undefined;
 
-  private credentials;
+  public credentials;
 
   groupId = this.route.snapshot.paramMap.get('groupID') || '';
 

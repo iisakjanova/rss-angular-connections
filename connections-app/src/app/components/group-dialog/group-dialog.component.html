@@ -31,7 +31,10 @@
     <p class="messages-list__message" *ngIf="(list$ | async)?.length === 0">
       There is no messages yet
     </p>
-    <mat-card *ngFor="let item of items$ | async" class="messages-list__item">
+    <mat-card
+      *ngFor="let item of items$ | async"
+      class="messages-list__item"
+      [class.not-user]="item.authorID !== credentials.uid">
       <mat-card-content>
         <p>{{ item.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</p>
         <p>{{ item.name }}</p>
