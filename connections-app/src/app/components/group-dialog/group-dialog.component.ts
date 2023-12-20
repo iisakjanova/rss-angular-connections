@@ -93,12 +93,13 @@ export class GroupDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list$.pipe(take(1)).subscribe(list => {
-      if (!list || list.length === 0) {
-        this.getMessages();
+    this.users$.pipe(take(1)).subscribe(users => {
+      if (!users || users.length === 0) {
         this.getPeople();
       }
     });
+
+    this.getMessages();
   }
 
   get group$() {
@@ -135,7 +136,6 @@ export class GroupDialogComponent implements OnInit {
     });
 
     this.getMessages();
-    this.getPeople();
   }
 
   // eslint-disable-next-line class-methods-use-this
