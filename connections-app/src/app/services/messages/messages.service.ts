@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, switchMap, take } from 'rxjs';
 import { SuccessMessagesResponse } from 'src/app/models/response.models';
+import { selectTimestamp } from 'src/app/redux/selectors/messages.selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,10 @@ import { SuccessMessagesResponse } from 'src/app/models/response.models';
 export class MessagesService {
   private baseApiUrl = 'https://tasks.app.rs.school/angular/groups/';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store
+  ) {}
 
   getMessages(
     email: string,
@@ -25,6 +30,18 @@ export class MessagesService {
 
     const apiUrl = `${this.baseApiUrl}read?groupID=${groupID}`;
     const options = { headers };
-    return this.http.get<SuccessMessagesResponse>(apiUrl, options);
+    const timestamp$ = this.store
+      .select(selectTimestamp(groupID))
+      .pipe(take(1));
+
+    return timestamp$.pipe(
+      switchMap(timestamp => {
+        const apiUrlWithTimestamp = `${apiUrl}&since=${timestamp}`;
+        return this.http.get<SuccessMessagesResponse>(
+          apiUrlWithTimestamp,
+          options
+        );
+      })
+    );
   }
 }

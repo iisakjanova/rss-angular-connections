@@ -20,3 +20,9 @@ export const selectMessages = (groupID: string) =>
     selectMessagesState,
     state => state.items[groupID]?.messages || []
   );
+
+export const selectTimestamp = (groupID: string) =>
+  createSelector(
+    selectMessagesState,
+    (state: MessagesState) => state.items[groupID]?.timestamp || 0
+  );
