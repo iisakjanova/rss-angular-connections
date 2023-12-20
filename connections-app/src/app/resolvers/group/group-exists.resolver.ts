@@ -28,7 +28,7 @@ export const groupExistsResolver: ResolveFn<boolean> = (
     switchMap(groups => {
       if (groups.length === 0) {
         return groupsService
-          .getGroups(credentials.email, credentials.token, credentials.uid)
+          .getGroups(credentials.email, credentials.uid, credentials.token)
           .pipe(
             switchMap(response => {
               // Dispatch success action with the response
@@ -38,7 +38,16 @@ export const groupExistsResolver: ResolveFn<boolean> = (
             catchError(error => {
               // Dispatch failure action with the error
               store.dispatch(GroupsActions.getGroupsFailure({ error }));
-              return error;
+              snackBar.open(
+                `Server Error. This group is not fetched!`,
+                'Close',
+                {
+                  duration: 5000,
+                  panelClass: ['error-snackbar'],
+                }
+              );
+              router.navigate(['/']);
+              return [];
             })
           );
       }

@@ -20,7 +20,7 @@ export const conversationResolver: ResolveFn<boolean> = (
   if (!conversationID) {
     store.dispatch(ConversationActions.createConversation());
     return conversationService
-      .createConversation(credentials.email, credentials.token, credentials.uid)
+      .createConversation(credentials.email, credentials.uid, credentials.token)
       .pipe(
         switchMap(response => {
           const newConversationID = response?.conversationID;

@@ -20,7 +20,9 @@ export const messagesReducer = createReducer(
   on(
     MessagesActions.getMessagesSuccess,
     (state, { response, groupId }): MessagesState => {
-      const normalizedData: { [id: string]: MessageItem[] } = {};
+      const normalizedData: {
+        [id: string]: { messages: MessageItem[]; timestamp: number };
+      } = {};
 
       response.Items.forEach(item => {
         const messageItem: MessageItem = {
@@ -30,10 +32,10 @@ export const messagesReducer = createReducer(
         };
 
         if (!normalizedData[groupId]) {
-          normalizedData[groupId] = [];
+          normalizedData[groupId] = { messages: [], timestamp: Date.now() };
         }
 
-        normalizedData[groupId].push(messageItem);
+        normalizedData[groupId].messages.push(messageItem);
       });
 
       return {

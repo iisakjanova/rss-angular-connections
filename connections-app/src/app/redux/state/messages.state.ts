@@ -7,7 +7,12 @@ export interface MessageItem {
 }
 
 export interface MessagesState {
-  items: { [id: string]: MessageItem[] };
+  items: {
+    [id: string]: {
+      messages: MessageItem[];
+      timestamp: number;
+    };
+  };
   loading: boolean;
   error: null | ApiError;
 }
