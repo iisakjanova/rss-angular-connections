@@ -15,7 +15,5 @@ export const selectMessagesError = createSelector(
   state => state.error
 );
 
-export const selectMessages = createSelector(
-  selectMessagesState,
-  state => state.items
-);
+export const selectMessages = (groupID: string) =>
+  createSelector(selectMessagesState, state => state.items[groupID] || []);

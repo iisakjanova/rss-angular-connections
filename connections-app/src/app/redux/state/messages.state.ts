@@ -7,13 +7,13 @@ export interface MessageItem {
 }
 
 export interface MessagesState {
-  items: MessageItem[];
+  items: { [id: string]: MessageItem[] };
   loading: boolean;
   error: null | ApiError;
 }
 
 export const initialMessagesState: MessagesState = {
-  items: [],
+  items: {},
   loading: false,
   error: null,
 };

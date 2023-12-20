@@ -1,7 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as MessagesActions from '../actions/messages.actions';
-import { initialMessagesState, MessagesState } from '../state/messages.state';
+import {
+  initialMessagesState,
+  MessageItem,
+  MessagesState,
+} from '../state/messages.state';
 
 export const messagesReducer = createReducer(
   initialMessagesState,
@@ -15,16 +19,29 @@ export const messagesReducer = createReducer(
   ),
   on(
     MessagesActions.getMessagesSuccess,
-    (state, { response }): MessagesState => {
-      const normalizedData = response.Items.map(item => ({
-        authorID: item.authorID.S,
-        message: item.message.S,
-        createdAt: item.createdAt.S,
-      }));
+    (state, { response, groupId }): MessagesState => {
+      const normalizedData: { [id: string]: MessageItem[] } = {};
+
+      response.Items.forEach(item => {
+        const messageItem: MessageItem = {
+          authorID: item.authorID.S,
+          message: item.message.S,
+          createdAt: item.createdAt.S,
+        };
+
+        if (!normalizedData[groupId]) {
+          normalizedData[groupId] = [];
+        }
+
+        normalizedData[groupId].push(messageItem);
+      });
 
       return {
         ...state,
-        items: normalizedData,
+        items: {
+          ...state.items,
+          ...normalizedData,
+        },
         loading: false,
         error: null,
       };

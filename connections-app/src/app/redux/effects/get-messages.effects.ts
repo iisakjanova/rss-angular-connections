@@ -19,6 +19,7 @@ export class GetMessagesEffects {
             map(response => {
               return MessagesActions.getMessagesSuccess({
                 response,
+                groupId: action.groupID,
               });
             }),
             catchError(error => {

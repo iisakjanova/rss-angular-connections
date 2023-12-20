@@ -11,7 +11,7 @@ export const getMessages = createAction(
 
 export const getMessagesSuccess = createAction(
   '[Messages] Get Messages Success',
-  props<{ response: SuccessMessagesResponse }>()
+  props<{ response: SuccessMessagesResponse; groupId: string }>()
 );
 
 export const getMessagesFailure = createAction(

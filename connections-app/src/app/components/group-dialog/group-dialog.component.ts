@@ -49,11 +49,11 @@ export class GroupDialogComponent implements OnInit {
 
   private credentials;
 
-  groupId!: string;
+  groupId = this.route.snapshot.paramMap.get('groupID') || '';
 
   isCurrentUser$: Observable<boolean>;
 
-  list$ = this.store.select(selectMessages);
+  list$ = this.store.select(selectMessages(this.groupId));
 
   users$ = this.store.select(selectPeople);
 
@@ -86,7 +86,7 @@ export class GroupDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list$.subscribe(list => {
+    this.list$.pipe(take(1)).subscribe(list => {
       if (list.length === 0) {
         this.getMessages();
       }
