@@ -69,11 +69,14 @@ export class GroupDialogComponent implements OnInit {
         return [];
       }
 
-      return messages.map(message => ({
-        ...message,
-        name:
-          users.find(user => user.uid === message.authorID)?.name || 'Unknown',
-      }));
+      return messages
+        .map(message => ({
+          ...message,
+          name:
+            users.find(user => user.uid === message.authorID)?.name ||
+            'Unknown',
+        }))
+        .sort((a, b) => Number(a.createdAt) - Number(b.createdAt));
     })
   );
 
