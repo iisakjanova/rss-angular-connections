@@ -46,6 +46,7 @@ const routes: Routes = [
   {
     path: 'conversation/:conversationId',
     component: ConversationPageComponent,
+    canActivate: [AuthGuard],
     resolve: {
       conversationExists: conversationResolver,
     },
